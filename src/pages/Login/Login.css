@@ -1,0 +1,331 @@
+.container{
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 838px;
+    max-width: 100%;
+    min-height: 75%;
+    margin-top: 20px;
+  }
+  
+  .container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+  }
+  
+  .container span{
+    font-size: 12px;
+  }
+  
+  .container a{
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+  }
+  
+  .toggle-container h1{
+    font-size: 27px;
+  }
+  
+  .toggle-container p1{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 5px 28px 0 28px;
+  }
+  
+  .toggle-container p2{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 75px 0 20px 0;
+  }
+  
+  .container button{
+    background-color: #7c7c7c;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+  }
+  
+  .form-container button:hover{
+    background-color: #4552AD;
+    transform: scale(110%);
+  }
+  
+  .sign-up button{
+    margin-top: 18px;
+  }
+  
+  .container .cssbuttons-io-button {
+    background: transparent;
+    color: white;
+    font-family: inherit;
+    padding: 0.35em;
+    padding-left: 1.2em;
+    font-size: 17px;
+    margin: -7px;
+    font-weight: 500;
+    border-radius: 0.9em;
+    border: 1px white solid;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em transparent;
+    overflow: hidden;
+    position: relative;
+    height: 2.8em;
+    padding-right: 3.3em;
+    cursor: pointer;
+    min-width: 200px;
+    justify-content: center;
+  }
+  
+  .container .cssbuttons-io-button .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #343e85;
+    right: 0.3em;
+    transition: all 0.3s;
+  }
+  
+  .container .cssbuttons-io-button:hover .icon {
+    width: calc(100% - 0.6em);
+  }
+  
+  .container .cssbuttons-io-button .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #343e85;
+  }
+  
+  .container .cssbuttons-io-button:hover .icon svg {
+    transform: translateX(0.1em);
+  }
+  
+  .container .cssbuttons-io-button:active .icon {
+    transform: scale(0.95);
+  }
+  
+  .container form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+  }
+  
+  .form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  
+  .sign-in a{
+    transition: 0.1s;
+  }
+  
+  .sign-in a:hover{
+    color: #343e85;
+    font-weight: 750;
+  }
+  
+  .container.active .sign-in{
+    transform: translateX(100%);
+  }
+  
+  .sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  .container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+  }
+  
+  @keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+  }
+  
+  .social-icons{
+    margin: 12px 0;
+  }
+  
+  .social-icons a:hover{
+    transform: scale(120%);
+    color:#4552AD;
+  }
+  
+  .social-icons a{
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+    transition: 0.1s;
+  }
+  
+  .toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+  }
+  
+  .container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+  }
+  
+  .toggle{
+    background-color: #4552AD;
+    height: 100%;
+    background: linear-gradient(to right, rgb(72, 84, 170), #3d49a1);
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .container.active .toggle{
+    transform: translate(50%);
+  }
+  
+  .toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 35px;
+    text-align: center;
+    top: 10px;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .toggle-left{
+    transform: translateX(-200%);
+  }
+  
+  .container.active .toggle-left{
+    transform: translateX(0);
+  }
+  
+  .toggle-right{
+    right: 0;
+    transform: translateX(0);
+  }
+  
+  .container.active .toggle-right{
+    transform: translateX(200%);
+  }
+  
+  .inputstxt{
+    position: relative;
+    margin: 15px 0 0 0;
+  }
+  
+  .inputstxt label{
+    color: #919191;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 1em;
+    pointer-events: none;
+    transition: .3s;
+    margin-left: 30px;
+  }
+  
+  .inputstxt input{
+    color: black;
+    border: none;
+    background: #eee;
+    border-radius: 8px;
+    width: 300px;
+    height: 45px;
+    padding: 0 1em;
+    outline: none;
+    box-shadow: 3px 5px 0 #D0D0D0;
+  }
+  
+  .inputstxt i{
+    color: #919191;
+    transform: scale(80%);
+    padding-right: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .inputstxt input:focus~label, .inputstxt input:not(:placeholder-shown)~label{
+    top: 0;
+    background-color: #eee;
+    font-size: 0.7rem;
+    border-radius: 5px;
+  }
+  
+  .inputstxt span i{
+    color: #919191;
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    transform: translateY(-50%);
+    transform: scale(150%);
+    cursor: pointer;
+    user-select: none;
+    background-color: #eee;
+    padding-left: 3px;
+  }
