@@ -1,4 +1,4 @@
-// pages/Login.tsx
+// pages/Login/Login.tsx
 
 import { useState, useRef, useEffect } from "react";
 import './Login.css'
@@ -82,7 +82,7 @@ export function Login(){
                 <h1>Criar Conta</h1>
                 <div className="social-icons">
                     <a href="#" className="icon"><i className="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" className="icon"><i className="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" className="icon"><i className="fa-brands fa-microsoft"></i></a>
                     <a href="#" className="icon"><i className="fa-brands fa-github"></i></a>
                     <a href="#" className="icon"><i className="fa-brands fa-linkedin"></i></a>
                 </div>
@@ -119,7 +119,7 @@ export function Login(){
                 <h1>Entrar</h1>
                 <div className="social-icons">
                     <a href="#" className="icon"><i className="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" className="icon"><i className="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" className="icon"><i className="fa-brands fa-microsoft"></i></a>
                     <a href="#" className="icon"><i className="fa-brands fa-github"></i></a>
                     <a href="#" className="icon"><i className="fa-brands fa-linkedin"></i></a>
                 </div>
@@ -195,5 +195,3 @@ export function Login(){
     </div>
     );
 }
-
-
