@@ -6,33 +6,39 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* App.css */
+
 body {
     margin: 0;
-    height: 100%;
+    font-family: Arial, sans-serif;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    background-color: rgb(43, 43, 43);
 }
-  
+
 #root {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Garante que ocupe toda a tela */
+    background-color: rgb(43, 43, 43);
 }
 
 .app-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background-color: rgb(43, 43, 43);  
+    background-color: rgb(43, 43, 43);
 } 
 
 /* Main content */
 .main-container {
-    flex-grow: 1; /* Faz com que ocupe o espaço disponível */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 150px;
-    margin-bottom: 50px;
-    background-color: rgb(43, 43, 43);
+  flex-grow: 1; /* Faz com que ocupe o espaço disponível */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  background-color: rgb(43, 43, 43);
 }

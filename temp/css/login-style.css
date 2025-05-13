@@ -1,7 +1,209 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-.container{
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body{
+  background-color: #e2e2e2; 
+  background: linear-gradient(to right, #e2e2e2, #c4c4c4);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+}
+
+.header{
+  background-color: #ffffff;
+  width: 100%;
+  height: 110px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+}
+
+.header .logo{
   color: black;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.header .logo p2{
+  padding-left: 20px;
+}
+
+.header .icon a{
+  color: black;
+  font-size: 40px;
+  padding-left: 10px;
+}
+
+.input-pesquisar{
+  position: relative;
+  margin: 0 0 0 50px; 
+}
+
+.input-pesquisar label{
+  color: #919191;
+  padding: 0 5px;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 1em;
+  pointer-events: none;
+  transition: .3s;
+  margin: 0 0 0 25px;
+}
+
+.input-pesquisar input{
+  color: black;
+  border: none;
+  background: #eee;
+  border-radius: 8px;
+  width: 420px;
+  height: 45px;
+  padding: 0 1em;
+  outline: none;
+  box-shadow: 3px 5px 0 #D0D0D0;
+}
+
+.input-pesquisar input:focus~label, .input-pesquisar input:valid~label{
+  top: 0;
+  background-color: #eee;
+  font-size: 0.7rem;
+  border-radius: 5px;
+  margin: 0 0 0 25px;
+}
+
+.input-pesquisar .button-x{
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 0 15px 0 7px;
+}
+
+.button-x:hover{
+  transform: scale(120%);
+}
+
+.button-x:active{
+  color: #ff0000;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 130px;
+  height: 45px;
+  border: solid 1,5px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .2s;
+  background-color: transparent;
+  border-color: black;
+  margin: 5px;
+}
+
+.button-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 150px;
+  height: 45px;
+  border: solid 2px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .2s;
+  background-color: transparent;
+  border-color: black;
+  margin: 5px;
+}
+  
+.button-icon {
+  width: 100%;
+  transition-duration: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+.button-icon svg {
+  width: 17px;
+}
+
+.button-icon svg path {
+  fill: rgb(0, 0, 0);
+  transition-duration: .2s;
+}
+
+.button-text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: rgb(0, 0, 0);
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .2s;
+}
+
+.button:hover {
+  width: 130px;
+  border-radius: 40px;
+  transition-duration: .2s;
+}
+
+.button-carrinho:hover {
+  width: 150px;
+  border-radius: 40px;
+  transition-duration: .2s;
+}
+  
+.button:hover .button-icon, .button-carrinho:hover .button-icon {
+  width: 30%;
+  transition-duration: .2s;
+  padding-left: 20px;
+}
+
+.button:hover .button-text, .button-carrinho:hover .button-text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .2s;
+  padding-right: 10px;
+}
+
+.button:active, .button-carrinho:active {
+  transform: translate(0.5px ,0.5px);
+  border-color: #4552AD;
+  background-color: #4552AD;
+}
+
+.button:active .button-icon svg path, .button-carrinho:active .button-icon svg path {
+  fill: #ffffff;
+}
+
+.button:active .button-text, .button-carrinho:active .button-text {
+  color: #ffffff;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+.container{
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -9,7 +211,7 @@
   overflow: hidden;
   width: 838px;
   max-width: 100%;
-  min-height: 100%;
+  min-height: 75%;
   margin-top: 20px;
 }
 
@@ -221,7 +423,7 @@
   overflow: hidden;
   transition: all 0.6s ease-in-out;
   border-radius: 150px 0 0 100px;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .container.active .toggle-container{
