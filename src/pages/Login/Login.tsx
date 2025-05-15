@@ -3,10 +3,10 @@
 import { Button, Input } from "@chakra-ui/react";
 import { useRef } from "react";
 import useLoginToggle from "./toggle-script";
-import './Login.css'  
-import './input-style.css'   
-import './social-icons-style.css'   
-import './toggle-button-style.css'   
+import './CSS/Login.css'  
+import './CSS/input-style.css'   
+import './CSS/social-icons-style.css'   
+import './CSS/toggle-button-style.css'   
 
 export function Login(){
     const loginContainerRef = useRef<HTMLDivElement>(null);
@@ -70,8 +70,8 @@ export function Login(){
                     <span>ou use seu e-mail e senha</span>
                     <div className="inputstxt">
                         <i className="fa-solid fa-at"/>
-                        <Input id="inpEmail-in" required type="email" placeholder=""/>
-                        <label htmlFor="inpEmail-in">E-mail</label>
+                        <Input id="inpEmail-in" required type="text" placeholder=""/>
+                        <label htmlFor="inpEmail-in">Usuário/E-mail</label>
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-key"/>
