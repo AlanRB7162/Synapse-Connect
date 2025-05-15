@@ -125,3 +125,12 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  @media(max-width: 860px) {
+    .input-pesquisar{
+      display: none;
+    }
+    .header{
+      justify-content: center;
+    }
+  }

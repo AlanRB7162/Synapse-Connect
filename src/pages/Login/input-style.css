@@ -1,0 +1,63 @@
+.inputstxt{
+  position: relative;
+  margin: 15px 0 0 0;
+}
+
+.inputstxt label{
+  color: #6d5223;;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 1em;
+  pointer-events: none;
+  transition: .3s;
+  margin-left: 30px;
+}
+
+.inputstxt input{
+  color: #6d5223;
+  border: none;
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  border-radius: 8px;
+  width: 300px;
+  height: 45px;
+  padding: 0 1em;
+  outline: none;
+  box-shadow: 3px 5px 0 #bb8e40;
+}
+
+.inputstxt i{
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  transform: scale(80%);
+  padding-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.inputstxt input:focus~label, .inputstxt input:not(:placeholder-shown)~label{
+  top: 0;
+  background: #F1CA84;
+  font-size: 0.7rem;
+  border-radius: 5px;
+}
+
+.inputstxt span i{
+  color: #919191;
+  position: absolute;
+  right: 10px;
+  top: 38%;
+  transform: translateY(-50%);
+  transform: scale(150%);
+  cursor: pointer;
+  user-select: none;
+  background-color: #eee;
+  padding-left: 3px;
+}
+
+.inputstxt .fa-eye{
+  background: #6d5223;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
