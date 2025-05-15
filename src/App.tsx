@@ -6,8 +6,14 @@ import { Provider } from './components/ui/provider';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './pages/Login/Login';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { pingServer } from './services/api';
 
 function App() {
+  useEffect(() => {
+    pingServer();
+  }, []);
   return (
     <Provider>
     <Router>
