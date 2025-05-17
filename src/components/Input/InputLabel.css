@@ -1,0 +1,19 @@
+/*src/components/Input/InputLabel.css*/
+
+.input-label input{
+  color: #6d5223;
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  box-shadow: 3px 5px 0 #bb8e40;
+}
+
+.input-label input::selection{
+  color: white;
+}
+
+.input-label label{
+  color: #6d5223;
+}
+
+.input-label input:focus~label, .input-label input:valid~label{
+  background-color: #F1CA84;
+}

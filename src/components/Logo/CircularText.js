@@ -1,3 +1,5 @@
+//src/components/Logo/CircularText.js
+
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 

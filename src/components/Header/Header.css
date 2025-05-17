@@ -1,136 +1,15 @@
-/* Header */
-.header {
-    background-color: rgba(29, 29, 29, 1);
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 105px;
-    z-index: 1000;
-    border-radius: 0 0 15px 15px; 
-    box-shadow: black ;
+/*src/components/Header/Header.css*/
+
+.header{
+  background-color: rgba(29, 29, 29, 1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 0 0 15px 15px; 
+  box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
-  .logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .fa-brain{
-    transform: translateX(-205%);
-    scale: 220%;
-    background: linear-gradient(to right, #F1CA84, #ECB251);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-  }
-  
-  .header-title {
-    font-weight: bolder;
-    font-size: 20px;
-    line-height: 1;
-    transform: translateX(-10%);
-  }
-  
-  .header-title h2 {
-    margin: 0;
-  }
-  
-  .header-title h2:last-child {
-    margin-left: 20px; /* desloca "Connect" para a direita */
-  }
-
-  .input-pesquisar{
-    position: relative;
-    margin-right: 10px;
-  }
-
-  .input-pesquisar label{
-    color: #6d5223;
-    padding: 0 5px;
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    left: 1em;
-    pointer-events: none;
-    transition: .3s;
-    margin: 0 0 0 25px;
-  }
-
-  .input-pesquisar input{
-    color: #6d5223;
-    border: none;
-    background: linear-gradient(to right, #F1CA84, #ECB251);
-    border-radius: 8px;
-    width: 420px;
-    height: 45px;
-    padding: 0 1em;
-    outline: none;
-    box-shadow: 3px 5px 0 #bb8e40;
-  }
-
-  .input-pesquisar input::selection{
-    color: white;
-  }
-
-  .input-pesquisar input:focus~label, .input-pesquisar input:valid~label{
-    top: 0;
-    background: #F1CA84;
-    font-size: 0.7rem;
-    border-radius: 5px;
-    margin: 0 0 0 40px;
-  }
-
-  .input-pesquisar .button-x{
-    width: 15px;
-    height: 15px;
-    background-color: transparent;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.2s;
-    margin: 0 15px 0 7px;
-    margin-left: 15px;
-  }
-
-  .button-x i {
-    color: #ECB251;
-  }
-
-  .button-x:hover{
-    transform: scale(120%);
-  }
-
-  .gradient-text {
-    background: linear-gradient(to right, #F1CA84, #ECB251);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    font-size: 2rem; /* ajuste conforme necessário */
-  }
-  
-  .button-x:active i{
-    color: #ff0000;
-    transition: 0.1s;
-  }
-
-  .fa-magnifying-glass{
-    margin-right: 15px;
-    background: linear-gradient(to right, #F1CA84, #ECB251);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  @media(max-width: 860px) {
-    .input-pesquisar{
-      display: none;
-    }
-    .header{
-      justify-content: center;
-    }
-  }
+.fa-magnifying-glass path{
+  color: #ECB251;
+}

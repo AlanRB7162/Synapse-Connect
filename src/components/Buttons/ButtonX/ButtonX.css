@@ -1,0 +1,16 @@
+/*src/components/Buttons/ButtonX/ButtonX.css*/
+
+.button-x {
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button-x svg {
+  color: #ECB251;
+}
+
+.button-x:active svg {
+  color: #ff0000;
+  transition: 0.15s;
+}

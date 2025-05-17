@@ -1,4 +1,4 @@
-// components/Footer.tsx
+//src/components/Footer/Footer.tsx
 
 import './Footer.css'
 
