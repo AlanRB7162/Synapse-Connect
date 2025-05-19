@@ -12,6 +12,8 @@ interface InputLabelProps {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   maxWidth?: string;
+  required?: boolean;
+  disabled?: boolean;
 }
 
 const InputLabel: React.FC<InputLabelProps> = ({
@@ -21,6 +23,8 @@ const InputLabel: React.FC<InputLabelProps> = ({
   value,
   onChange,
   maxWidth = "100%",
+  required = false,
+  disabled = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const shouldFloat = isFocused || (value && value.length > 0);
@@ -34,6 +38,8 @@ const InputLabel: React.FC<InputLabelProps> = ({
         type={type}
         placeholder=" "
         value={value}
+        required={required}
+        disabled={disabled}
         onChange={onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

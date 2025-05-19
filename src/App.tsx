@@ -7,6 +7,7 @@ import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './pages/Login/Login';
 import { pingServer } from './services/api';
+import { Crud } from './pages/CRUD/CRUD';
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
         <main className="main-container">
           <Routes>
             <Route path="/login" element={<Login/>} />
+            <Route path='/crud' element={<Crud/>}/>
           </Routes>
         </main>
         <Footer/>
