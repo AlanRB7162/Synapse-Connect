@@ -13,4 +13,13 @@ export const pingServer = async () => {
     }
 };
 
+export const registerUser = async (nome: string, email: string, usuario: string, senha: string) => {
+    try {
+        const response = await api.post("/register", { nome, email, usuario, senha });
+        console.log("Server response:", response.data.message);
+    } catch (error) {
+        console.error("Error sending data to server: ", error);
+    }
+};
+
 export default api;

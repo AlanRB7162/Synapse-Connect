@@ -22,3 +22,14 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+app.post("/register", (req, res) => {
+    const { nome, usuario, email, senha } = req.body;
+    db_1.default.query("INSERT INTO Usuario (nome, usuario, email, senha) VALUES (?, ?, ?, ?)", [nome, usuario, email, senha], (err, result) => {
+        if (err) {
+            console.error("Registering error: ", err);
+            return res.status(500).json({ error: "Database registration error" });
+        }
+        console.log("User registered successfully: ", { nome, usuario, email });
+        res.status(200).json({ message: "Registration successful" });
+    });
+});

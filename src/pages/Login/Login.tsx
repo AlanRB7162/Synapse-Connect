@@ -2,15 +2,31 @@
 
 import { Button, Input } from "@chakra-ui/react";
 import { useRef } from "react";
+import { useState } from "react";
 import useLoginToggle from "./toggle-script";
 import './CSS/Login.css'  
-import './CSS/input-style.css'   
+import './CSS/input-style.css'
 import './CSS/social-icons-style.css'   
-import './CSS/toggle-button-style.css'   
+import './CSS/toggle-button-style.css' 
+import { registerUser } from '../../services/api'  
+
+const handleRegister = async (e: React.FormEvent, nome: string, email: string, usuario: string, senha: string) => {
+    e.preventDefault();
+    try {
+        await registerUser(nome, email, usuario, senha);
+        console.log("User registered successfully", { nome, email, usuario });
+    } catch (error) {
+        console.error("Error registering user:", error);
+    }
+}
 
 export function Login(){
     const loginContainerRef = useRef<HTMLDivElement>(null);
     const { handleSignUpClick, handleSignInClick } = useLoginToggle(loginContainerRef);
+    const [nome, setNome] = useState("");
+    const [usuario, setUsuario] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
 
     return(
         <div className="login-container" ref={loginContainerRef} >
@@ -33,28 +49,34 @@ export function Login(){
                     <span>ou use seu e-mail para cadastro</span>
                     <div className="inputstxt">
                         <i className="fa-solid fa-address-card"/>
-                        <Input id="inpNome-up" required type="text" placeholder=""/>
+                        <Input id="inpNome-up" required type="text" value={nome} onChange={(e) => setNome(e.target.value)} placeholder=""/>
                         <label htmlFor="inpNome-up">Nome</label>
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-user"/>
-                        <Input id="inpUser-up" required type="text" placeholder=""/>
+                        <Input id="inpUser-up" required type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} placeholder=""/>
                         <label htmlFor="inpUser-up">Usuário</label>
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-at"/>
-                        <Input id="inpEmail-up" required type="email" placeholder=""/>
+                        <Input id="inpEmail-up" required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder=""/>
                         <label htmlFor="inpEmail-up">E-mail</label>
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-key"/>
-                        <Input id="inpSenha-up" required type="password" placeholder=""/>
+                        <Input id="inpSenha-up" required type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder=""/>
                         <label htmlFor="inpSenha-up">Senha</label>
                         <span>
                             <i className="fa-solid fa-eye" id="tpEyeUp"/>
                         </span>
                     </div>
-                    <Button id="btSign-up" className="button">Registre-se</Button>
+                    <Button
+                        id="btSign-up"
+                        className="button"
+                        onClick={(e) => handleRegister(e, nome, email, usuario, senha)}
+                    >
+                        Registre-se
+                    </Button>
                 </form>  
             </div>
 
