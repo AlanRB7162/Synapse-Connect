@@ -12,4 +12,15 @@
 
 .fa-magnifying-glass path{
   color: #ECB251;
+  transition: 0.1s;
+}
+
+button:active .fa-magnifying-glass path{
+  color: #ffffff;
+}
+
+@media (max-width:400px){
+  header .header-title{
+    display: none;
+  }
 }

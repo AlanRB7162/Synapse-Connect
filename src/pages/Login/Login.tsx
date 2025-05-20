@@ -1,8 +1,7 @@
 //src/pages/Login/Login.tsx
 
 import { Button, Input } from "@chakra-ui/react";
-import { useRef } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useLoginToggle from "./toggle-script";
 import './CSS/Login.css'  
 import './CSS/input-style.css'
@@ -33,13 +32,6 @@ export function Login(){
             <div className="form-container sign-up">
                 <form>
                     <h1>Criar Conta</h1>
-                    <div className="switch">
-                    <i className="fa-solid fa-user-graduate"></i>
-                    <span>Sou aluno//</span>   
-                        {/*falta adicionar o switch*/}
-                    <span>Sou professor</span>
-                    <i className="fa-solid fa-chalkboard-user"></i>
-                    </div>
                     <div className="social-icons">
                         <Button id="google-icon-up"><i className="fa-brands fa-google-plus-g"/></Button>
                         <Button id="microsoft-icon-up"><i className="fa-brands fa-microsoft"/></Button>

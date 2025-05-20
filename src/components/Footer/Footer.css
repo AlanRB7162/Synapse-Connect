@@ -1,19 +1,13 @@
 /*src/components/Footer/Footer.css*/
-footer {
-    background-color: rgba(29, 29, 29, 1);
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-  }
 
-  footer p{
-    background: linear-gradient(to right, #F1CA84, #ECB251);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-  }
+footer {
+  background-color: rgba(29, 29, 29, 1);
+} 
+
+.text{
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.5em !important; 
+}
