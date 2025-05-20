@@ -1,6 +1,6 @@
 //src/pages/CRUD/CRUD.tsx
 
-import { Button, Flex, For, Stack, Table, Text } from "@chakra-ui/react";
+import { Button, Flex, Table } from "@chakra-ui/react";
 import InputLabel from "../../components/Input/InputLabel";
 import { useState } from "react";
 
@@ -118,7 +118,6 @@ export function Crud(){
                     </Table.Header>
                     <Table.Body>
                         {clientes.map((cliente) => {
-                            const selecionado = cliente.id === linhaSelecionadaId;
 
                             return(
                                 <Table.Row 

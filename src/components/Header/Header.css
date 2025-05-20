@@ -35,8 +35,18 @@ button:hover{
   transform: scale(+120%);
 }
 
-@media (max-width:400px){
+.user-avatar:active{
+  transform: scale(90%);
+}
+
+@media (max-width:520px){
   header .header-title{
+    display: none;
+  }
+}
+
+@media (max-width:330px){
+  header .linha{
     display: none;
   }
 }

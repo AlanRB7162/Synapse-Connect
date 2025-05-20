@@ -2,12 +2,13 @@
 
 import { ElementType, useState } from 'react';
 import { Avatar, Box, Button, Flex, Icon } from '@chakra-ui/react';
-import { FaCartShopping, FaMagnifyingGlass } from 'react-icons/fa6';
+import { FaCartShopping, FaDoorOpen, FaMagnifyingGlass } from 'react-icons/fa6';
 import { Logo } from '../Logo/Logo';
 import { LogoTitle } from '../Logo/LogoTitle';
 import InputLabel from '../Input/InputLabel';
 import ButtonX from '../Buttons/ButtonX/ButtonX';
 import './Header.css'
+import { useNavigate } from 'react-router-dom';
 
 export function Header() {
     const [search, setSearch] = useState("");
@@ -19,8 +20,13 @@ export function Header() {
       return colorPalette[index]
     }
 
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    // ALAN - atualize `isLoggedIn` após o login
+    // ex: setIsLoggedIn(true) após login bem-sucedido
+
     return (
-      <Flex as="header" px={8} py={4} align="center" justify="space-between" flexWrap="wrap" gap={4} className="header">
+      <Flex as="header" px={8} py={4} align="center" justify="space-between" gap={4} className="header">
         <Flex id="logo" align="center" gap={4} flex="1">
           <Logo/>
           <LogoTitle/>
@@ -36,16 +42,23 @@ export function Header() {
           <ButtonX/>
         </Flex>
         <Button display={{base:"flex", md:"none"}} id='btPesquisar' variant='ghost'><Icon as={FaMagnifyingGlass as ElementType} className='icon fa-magnifying-glass'/></Button>
-        <Box height='50px' width='1px' bg="gray.300"/>
-        <Flex className='user-display' id='user-display'>
+        <Box height='50px' width='1px' bg="gray.300" className='linha'/>
+        {isLoggedIn && (
+        <Flex className='user-l-display' id='user-l-display'>
           <Button id='btCarrinho' className='btCarrinho' variant='ghost'><Icon as={FaCartShopping as ElementType} className='icon fa-cart-shopping'/></Button>
           <Flex className='user-avatar'>
-            <Avatar.Root variant='subtle' shape='full' ml='10px' colorPalette={pickPalette("Patrick")}>
-              <Avatar.Fallback name='Wellington Gregorio'/>
+            <Avatar.Root variant='subtle' shape='full' ml='10px' colorPalette={pickPalette("Synapse Connect")}>{/*PRECISAMOS PUXAR O NOME DO USUÁRIO LOGADO PARA CÁ*/}
+              <Avatar.Fallback name='Synapse Connect'/>{/*PRECISAMOS PUXAR O NOME DO USUÁRIO LOGADO PARA CÁ*/}
               <Avatar.Image/>
             </Avatar.Root>
           </Flex>
         </Flex>
+        )}
+        {!isLoggedIn && (
+        <Flex className='user-nl-display' id='user-nl-display'>
+          <Button onClick={() => navigate("/login")} id='btLogin' className='btLogin' variant='ghost' p='7px'><Icon as={FaDoorOpen as ElementType} className='icon fa-door-open'/>Entrar</Button>
+        </Flex>
+        )}
       </Flex>
     );
 }

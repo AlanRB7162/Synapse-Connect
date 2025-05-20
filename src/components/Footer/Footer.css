@@ -11,3 +11,19 @@ footer {
   font-weight: bold;
   font-size: 1.5em !important; 
 }
+
+.link{
+  transition: 0.1s;
+}
+
+.link:hover{
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  transform: scale(+110%);
+}
+
+.link:active{
+  transform: scale(90%);
+}

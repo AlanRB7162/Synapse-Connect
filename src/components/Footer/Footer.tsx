@@ -1,6 +1,6 @@
 //src/components/Footer/Footer.tsx
 
-import { FaCircleInfo, FaCircleQuestion, FaFile, FaGithub, FaLinkedin, FaShieldHalved, FaSquareInstagram, FaYoutube } from 'react-icons/fa6';
+import { FaCircleInfo, FaCircleQuestion, FaFile, FaGithub, FaLinkedin, FaShieldHalved, FaSquareInstagram, FaUpRightFromSquare, FaYoutube } from 'react-icons/fa6';
 import { Blockquote, Box, Code, Flex, Icon, Link, Text } from '@chakra-ui/react';
 import { ElementType } from 'react';
 import { LogoTitle } from '../Logo/LogoTitle';
@@ -22,10 +22,10 @@ export function Footer(){
                 <Box height={{base:'1px', md:'200px'}} width={{base:'100%', md:'1px'}} my={{base:'20px', md:'0px'}} bg="gray.300"/>
                 <Flex className='redes' width={{base:'100%', md:'25%'}} justify='center' direction='column' ml='20px' mr='20px'>  
                     <Text className='text'>Contatos:</Text>
-                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaGithub as ElementType} className='icon'/>GitHub</Link></Flex>
-                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaLinkedin as ElementType} className='icon'/>LinkedIn</Link></Flex>
-                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaSquareInstagram as ElementType} className='icon'/>Instagram</Link></Flex>
-                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaYoutube as ElementType} className='icon'/>YouTube</Link></Flex>
+                    <Flex><Link variant='underline' href='https://github.com/AlanRB7162/Synapse-Connect' className='link'><Icon as={FaGithub as ElementType} className='icon'/>GitHub<Icon as={FaUpRightFromSquare as ElementType} className='external'/></Link></Flex>
+                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaLinkedin as ElementType} className='icon'/>LinkedIn<Icon as={FaUpRightFromSquare as ElementType} className='external'/></Link></Flex>
+                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaSquareInstagram as ElementType} className='icon'/>Instagram<Icon as={FaUpRightFromSquare as ElementType} className='external'/></Link></Flex>
+                    <Flex><Link variant='underline' href='/' className='link'><Icon as={FaYoutube as ElementType} className='icon'/>YouTube<Icon as={FaUpRightFromSquare as ElementType} className='external'/></Link></Flex>
                 </Flex>
                 <Box height={{base:'1px', md:'200px'}} width={{base:'100%', md:'1px'}} my={{base:'20px', md:'0px'}} bg="gray.300"/>
                 <Flex className='links' width={{base:'100%', md:'25%'}} justify='center' direction='column' ml='20px'>
