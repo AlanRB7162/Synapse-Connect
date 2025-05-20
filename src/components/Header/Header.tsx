@@ -21,7 +21,7 @@ export function Header() {
     }
 
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     // ALAN - atualize `isLoggedIn` após o login
     // ex: setIsLoggedIn(true) após login bem-sucedido
 
