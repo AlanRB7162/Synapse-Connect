@@ -17,9 +17,9 @@ export function AvatarPopover() {
     }
 
     const handleLogout = () => {
-    logout();                // limpa usuário do contexto + localStorage
-    navigate("/login");      // redireciona para login
-  };
+      logout();                // limpa usuário do contexto + localStorage
+      navigate("/login");      // redireciona para login
+    };
 
   return (
     <Popover.Root>
@@ -47,7 +47,7 @@ export function AvatarPopover() {
             <Flex direction="column" align="center" justify="center" width="100%" padding="4" gap="2">
                 <Button id="btPerfil" className="user-avatar-button btPerfil" variant='outline' width='100%'><Icon as={FaUser as ElementType} className='icon fa-user'/>Meu Perfil</Button>
                 <Button id="btMeusCursos" className="user-avatar-button btMeusCursos" variant='outline' width='100%'><Icon as={FaBookOpen as ElementType} className='icon fa-book-open'/>Meus Cursos</Button>
-                <Button id="btSair" className="user-avatar-button btSair" variant='outline' width='100%'><Icon as={FaRightFromBracket as ElementType} className='icon fa-right-from-bracket' onClick={handleLogout}/>Sair</Button>
+                <Button id="btSair" className="user-avatar-button btSair" variant='outline' width='100%' onClick={handleLogout}><Icon as={FaRightFromBracket as ElementType} className='icon fa-right-from-bracket'/>Sair</Button>
             </Flex>
           </Popover.Body>
         </Popover.Content>

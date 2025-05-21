@@ -1,12 +1,12 @@
 import { Button } from "@chakra-ui/react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext"; // <-- IMPORTAR
+import { useAuth } from "../../contexts/AuthContext";
 import axios from "axios";
 
 export function CustomGoogleButton() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // <-- USAR CONTEXTO
+  const { login } = useAuth();
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -21,7 +21,6 @@ export function CustomGoogleButton() {
 
         console.log("Usuário logado:", res.data);
 
-        // Agora sim: atualiza o contexto E localStorage (o contexto já faz isso internamente)
         login(res.data);
 
         navigate("/");
