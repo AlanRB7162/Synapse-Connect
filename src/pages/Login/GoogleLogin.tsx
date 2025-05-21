@@ -32,7 +32,7 @@ export function CustomGoogleButton() {
   });
 
   return (
-    <Button id="google-icon-up" onClick={() => googleLogin()}>
+    <Button id="google-icon-in" onClick={() => googleLogin()}>
       <i className="fa-brands fa-google-plus-g" />
     </Button>
   );

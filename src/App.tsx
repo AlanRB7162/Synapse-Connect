@@ -9,6 +9,8 @@ import { pingServer } from './services/api';
 import { Crud } from './pages/CRUD/CRUD';
 import './App.css';
 import './components/Buttons/Button.css'
+import { Home } from './pages/Home/Home';
+import { Nav } from './components/Nav/Nav';
 
 function App() {
   useEffect(() => {
@@ -19,10 +21,12 @@ function App() {
     <Router>
       <div className="app-container">
         <Header/>
+        <Nav/>
         <main className="main-container">
           <Routes>
             <Route path="/login" element={<Login/>} />
             <Route path='/crud' element={<Crud/>}/>
+            <Route path='/' element={<Home/>}/>
           </Routes>
         </main>
         <Footer/>

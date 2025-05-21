@@ -7,11 +7,11 @@ import './CSS/Login.css'
 import './CSS/input-style.css'
 import './CSS/social-icons-style.css'   
 import './CSS/toggle-button-style.css' 
-import { registerUser } from '../../services/api'  
+import { loginUser, registerUser } from '../../services/api'  
 import { useNavigate } from "react-router-dom";
 import { CustomGoogleButton } from "./GoogleLogin";
-import { loginUser } from "../../services/api";
-
+import { useAuth } from "../../contexts/AuthContext";
+    
 const handleRegister = async (e: React.FormEvent, nome: string, email: string, usuario: string, senha: string) => {
     e.preventDefault();
     try {
@@ -29,15 +29,27 @@ export function Login(){
     const [usuario, setUsuario] = useState("");
     const [loginInput, setLoginInput] = useState("");
     const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [senhaRegistro, setSenhaRegistro] = useState("");
+    const [senhaLogin, setSenhaLogin] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-        const userData = await loginUser(loginInput, senha);
+        const userData = await loginUser(loginInput, senhaLogin);
         console.log("User logged in successfully: ", userData);
+
+        const rawUser = userData.user;
+
+        const user = {
+            name: rawUser.nome,
+            email: rawUser.email,
+            picture: rawUser.picture
+        };
+
+        login(user);
     
         navigate("/");
         } catch (error) {
@@ -51,7 +63,6 @@ export function Login(){
                 <form>
                     <h1>Criar Conta</h1>
                     <div className="social-icons">
-                        <CustomGoogleButton/>
                         <Button id="microsoft-icon-up"><i className="fa-brands fa-microsoft"/></Button>
                         <Button id="github-icon-up"><i className="fa-brands fa-github"/></Button>
                         <Button id="linkedin-icon-up"><i className="fa-brands fa-linkedin"/></Button>
@@ -74,7 +85,7 @@ export function Login(){
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-key"/>
-                        <Input id="inpSenha-up" required type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder=""/>
+                        <Input id="inpSenha-up" required type="password" value={senhaRegistro} onChange={(e) => setSenhaRegistro(e.target.value)} placeholder=""/>
                         <label htmlFor="inpSenha-up">Senha</label>
                         <span>
                             <i className="fa-solid fa-eye" id="tpEyeUp"/>
@@ -83,7 +94,7 @@ export function Login(){
                     <Button
                         id="btSign-up"
                         className="button"
-                        onClick={(e) => handleRegister(e, nome, email, usuario, senha)}
+                        onClick={(e) => handleRegister(e, nome, email, usuario, senhaRegistro)}
                     >
                         Registre-se
                     </Button>
@@ -107,7 +118,7 @@ export function Login(){
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-key"/>
-                        <Input id="inpSenha-in" required type="password" placeholder="" value={senha} onChange={(e) => setSenha(e.target.value)}/>
+                        <Input id="inpSenha-in" required type="password" placeholder="" value={senhaLogin} onChange={(e) => setSenhaLogin   (e.target.value)}/>
                         <label htmlFor="inpSenha-in">Senha</label>
                         <span>
                             <i className="fa-solid fa-eye" id="tpEyeIn"/>

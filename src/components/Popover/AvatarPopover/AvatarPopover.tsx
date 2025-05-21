@@ -11,10 +11,13 @@ export function AvatarPopover() {
 
     const colorPalette = ["red", "blue", "green", "yellow", "purple", "orange"]
 
-    const pickPalette = (name: string) => {
-      const index = name.charCodeAt(0) % colorPalette.length
-      return colorPalette[index]
-    }
+    const pickPalette = (name?: string) => {
+      if (!name || name.length === 0) {
+        return "gray"; // cor padrão para nome vazio ou indefinido
+      }
+      const index = name.charCodeAt(0) % colorPalette.length;
+      return colorPalette[index];
+    };
 
     const handleLogout = () => {
       logout();                // limpa usuário do contexto + localStorage
@@ -25,7 +28,7 @@ export function AvatarPopover() {
     <Popover.Root>
       <Popover.Trigger>
        <Flex className='user-avatar'>
-            <Avatar.Root variant='subtle' shape='full' ml='10px' colorPalette={user ? pickPalette(user.name) : "gray"}>
+            <Avatar.Root variant='subtle' shape='full' ml='10px' colorPalette={user?.name ? pickPalette(user.name) : "gray"}>
               <Avatar.Fallback name={user ? user.name : ""}/>
               <Float placement="bottom-end" offsetX="1" offsetY="1">
                 <Circle

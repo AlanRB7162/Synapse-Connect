@@ -18,7 +18,7 @@ const ButtonX: React.FC<ButtonXProps> = ({ onClear, ...props }) => {
       onClick={onClear}
       {...props}
     >
-      <Icon as={FaXmark as ElementType} fontSize="xl" />
+      <Icon as={FaXmark as ElementType}/>
     </Button>
   );
 };
