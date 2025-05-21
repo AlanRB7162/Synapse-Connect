@@ -22,4 +22,14 @@ export const registerUser = async (nome: string, email: string, usuario: string,
     }
 };
 
+export const loginUser = async (loginInput: string, senha: string) => {
+    try {
+        const response = await api.post("/login", { loginInput, senha });
+        console.log("Logged in successfully: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error ("Error logging in: ", error);
+        throw error;
+    }
+}
 export default api;

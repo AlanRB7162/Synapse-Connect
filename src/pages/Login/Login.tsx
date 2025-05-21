@@ -10,6 +10,7 @@ import './CSS/toggle-button-style.css'
 import { registerUser } from '../../services/api'  
 import { useNavigate } from "react-router-dom";
 import { CustomGoogleButton } from "./GoogleLogin";
+import { loginUser } from "../../services/api";
 
 const handleRegister = async (e: React.FormEvent, nome: string, email: string, usuario: string, senha: string) => {
     e.preventDefault();
@@ -26,10 +27,23 @@ export function Login(){
     const { handleSignUpClick, handleSignInClick } = useLoginToggle(loginContainerRef);
     const [nome, setNome] = useState("");
     const [usuario, setUsuario] = useState("");
+    const [loginInput, setLoginInput] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-
     const navigate = useNavigate();
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+        const userData = await loginUser(loginInput, senha);
+        console.log("User logged in successfully: ", userData);
+    
+        navigate("/");
+        } catch (error) {
+            console.error("Error logging in: ", error);
+        }
+    };
 
     return(
         <div className="login-container" ref={loginContainerRef} >
@@ -88,19 +102,19 @@ export function Login(){
                     <span>ou use seu e-mail e senha</span>
                     <div className="inputstxt">
                         <i className="fa-solid fa-at"/>
-                        <Input id="inpEmail-in" required type="text" placeholder=""/>
+                        <Input id="inpEmail-in" required type="text" placeholder="" value={loginInput} onChange={(e) => setLoginInput(e.target.value)}/>
                         <label htmlFor="inpEmail-in">Usuário/E-mail</label>
                     </div>
                     <div className="inputstxt">
                         <i className="fa-solid fa-key"/>
-                        <Input id="inpSenha-in" required type="password" placeholder=""/>
+                        <Input id="inpSenha-in" required type="password" placeholder="" value={senha} onChange={(e) => setSenha(e.target.value)}/>
                         <label htmlFor="inpSenha-in">Senha</label>
                         <span>
                             <i className="fa-solid fa-eye" id="tpEyeIn"/>
                         </span>
                     </div>
                         <Button id="btFgtPass" className="forgot">Esqueceu sua senha?</Button>
-                        <Button id="btSign-in" className="button">Entrar</Button>
+                        <Button id="btSign-in" className="button" onClick = {(e) => handleLogin(e)}>Entrar</Button>
                 </form>
             </div>
 

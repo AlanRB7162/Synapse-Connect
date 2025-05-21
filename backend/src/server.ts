@@ -37,3 +37,25 @@ app.post("/register", (req, res) => {
     }
   );
 });
+
+app.post("/login", (req, res) => {
+  const { loginInput, senha } = req.body;
+
+  db.query(
+    "SELECT * FROM Usuario WHERE (email = ? OR usuario = ?) AND senha = ?",
+    [loginInput, loginInput, senha],
+    (err, result: any) => {
+      if (err) {
+        console.error("Login validation error: ", err);
+        return res.status(500).json({ error: "Internal server error on login validation"});
+      }
+      if (result.length > 0) {
+        console.log("Login successful: ", result[0]);
+        res.status(200).json({ message: "Login successful", user: result[0] });
+      } else {
+        console.log("Invalid login credentials");
+        res.status(401).json({ error: "Invalid login credentials" });
+      }
+    }
+  );
+});
