@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import './App.css';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from './components/ui/provider';
 import { Header } from './components/Header/Header';
@@ -8,6 +7,8 @@ import { Footer } from './components/Footer/Footer';
 import { Login } from './pages/Login/Login';
 import { pingServer } from './services/api';
 import { Crud } from './pages/CRUD/CRUD';
+import './App.css';
+import './components/Buttons/Button.css'
 
 function App() {
   useEffect(() => {

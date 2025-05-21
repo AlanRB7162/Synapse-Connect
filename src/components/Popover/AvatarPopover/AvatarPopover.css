@@ -1,0 +1,15 @@
+.user-avatar-button{
+    padding: 5px;
+}
+
+.user-avatar-button .icon path{
+    color: white;
+}
+
+.user-avatar-button:hover .icon path{
+    color: #ECB251;;
+} 
+
+.user-avatar-button:hover{
+    color: #ECB251;;
+} 

@@ -10,23 +10,6 @@
   box-shadow: 0px 7px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
-.icon path{
-  color: #ECB251;
-  transition: 0.1s;
-}
-
-button:active .icon path{
-  color: #ffffff;
-}
-
-button:active{
-  transform: scale(90%) !important;
-}
-
-button:hover{
-  transform: scale(+115%);
-}
-
 .user-avatar{
   transition: 0.3s;
 }

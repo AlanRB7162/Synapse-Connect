@@ -1,0 +1,16 @@
+.icon path{
+  color: #ECB251;
+  transition: 0.1s;
+}
+
+button:active .icon path{
+  color: #ffffff;
+}
+
+button:active{
+  transform: scale(95%) !important;
+}
+
+button:hover{
+  transform: scale(+110%);
+}
