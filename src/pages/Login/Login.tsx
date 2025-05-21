@@ -8,6 +8,8 @@ import './CSS/input-style.css'
 import './CSS/social-icons-style.css'   
 import './CSS/toggle-button-style.css' 
 import { registerUser } from '../../services/api'  
+import { useNavigate } from "react-router-dom";
+import { CustomGoogleButton } from "./GoogleLogin";
 
 const handleRegister = async (e: React.FormEvent, nome: string, email: string, usuario: string, senha: string) => {
     e.preventDefault();
@@ -27,13 +29,15 @@ export function Login(){
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
+    const navigate = useNavigate();
+
     return(
         <div className="login-container" ref={loginContainerRef} >
             <div className="form-container sign-up">
                 <form>
                     <h1>Criar Conta</h1>
                     <div className="social-icons">
-                        <Button id="google-icon-up"><i className="fa-brands fa-google-plus-g"/></Button>
+                        <CustomGoogleButton/>
                         <Button id="microsoft-icon-up"><i className="fa-brands fa-microsoft"/></Button>
                         <Button id="github-icon-up"><i className="fa-brands fa-github"/></Button>
                         <Button id="linkedin-icon-up"><i className="fa-brands fa-linkedin"/></Button>
@@ -76,7 +80,7 @@ export function Login(){
                 <form>
                     <h1>Entrar</h1>
                     <div className="social-icons">
-                        <Button id="google-icon-in"><i className="fa-brands fa-google-plus-g"/></Button>
+                        <CustomGoogleButton/>
                         <Button id="microsoft-icon-in"><i className="fa-brands fa-microsoft"/></Button>
                         <Button id="github-icon-in"><i className="fa-brands fa-github"/></Button>
                         <Button id="linkedin-icon-in"><i className="fa-brands fa-linkedin"/></Button>

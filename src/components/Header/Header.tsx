@@ -11,15 +11,15 @@ import ButtonX from '../Buttons/ButtonX/ButtonX';
 import { PesquisarPopover } from '../Popover/PesquisarPopover/PesquisarPopover';
 import { CarrinhoPopover } from '../Popover/CarrinhoPopover/CarrinhoPopover';
 import { AvatarPopover } from '../Popover/AvatarPopover/AvatarPopover';
+import { useAuth } from '../../contexts/AuthContext';
 import './Header.css'
 
 export function Header() {
     const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // ALAN - atualize `isLoggedIn` após o login
-    // ex: setIsLoggedIn(true) após login bem-sucedido
+    
+    const { user } = useAuth();
 
     return (
       <Flex as="header" px={8} py={4} align="center" justify="space-between" gap={4} className="header">
@@ -39,13 +39,13 @@ export function Header() {
         </Flex>
         <PesquisarPopover/>
         <Box height='50px' width='1px' bg="gray.300" className='linha'/>
-        {isLoggedIn && (
+        {user && (
           <Flex className='user-l-display' id='user-l-display'>
             <CarrinhoPopover/>
             <AvatarPopover/>
           </Flex>
         )}
-        {!isLoggedIn && (
+        {!user && (
         <Flex className='user-nl-display' id='user-nl-display'>
           <Button onClick={() => navigate("/login")} id='btLogin' className='btLogin' variant='ghost' p='7px'><Icon as={FaDoorOpen as ElementType} className='icon fa-door-open'/>Entrar</Button>
         </Flex>
