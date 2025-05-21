@@ -14,7 +14,7 @@ export function Nav() {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <Flex as="nav" px={8} py={1} pt={3} align="center" gap={4} className="nav">
+    <Flex as="nav" pl={3} pr={5} py={1} pt={5} align="center" gap={4} className="nav">
       <NavPopover />
       <Breadcrumb.Root>
         <Breadcrumb.List>
@@ -34,7 +34,7 @@ export function Nav() {
                 <Breadcrumb.Item>
                   {isLast ? (
                     <Breadcrumb.Link asChild>
-                      <span aria-current="page">{formatLabel(segment)}</span>
+                      <span aria-current="page" className="nav-page">{formatLabel(segment)}</span>
                     </Breadcrumb.Link>
                   ) : (
                     <Breadcrumb.Link asChild>
