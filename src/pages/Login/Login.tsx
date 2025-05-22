@@ -11,6 +11,7 @@ import { loginUser, registerUser } from '../../services/api'
 import { useNavigate } from "react-router-dom";
 import { CustomGoogleButton } from "./GoogleLogin";
 import { useAuth } from "../../contexts/AuthContext";
+import { CustomGithubButton } from "./GithubLogin";
     
 const handleRegister = async (e: React.FormEvent, nome: string, email: string, usuario: string, senha: string) => {
     e.preventDefault();
@@ -107,7 +108,7 @@ export function Login(){
                     <div className="social-icons">
                         <CustomGoogleButton/>
                         <Button id="microsoft-icon-in"><i className="fa-brands fa-microsoft"/></Button>
-                        <Button id="github-icon-in"><i className="fa-brands fa-github"/></Button>
+                        <CustomGithubButton/>
                         <Button id="linkedin-icon-in"><i className="fa-brands fa-linkedin"/></Button>
                     </div>
                     <span>ou use seu e-mail e senha</span>
