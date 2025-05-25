@@ -21,7 +21,7 @@ export function AvatarPopover() {
 
     const handleLogout = () => {
       logout();                // limpa usuário do contexto + localStorage
-      navigate("/login");      // redireciona para login
+      navigate("/entrar");      // redireciona para login
     };
 
   return (

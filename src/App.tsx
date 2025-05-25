@@ -24,7 +24,7 @@ function App() {
         <Nav/>
         <main className="main-container">
           <Routes>
-            <Route path="/login" element={<Login/>} />
+            <Route path="/entrar" element={<Login/>} />
             <Route path='/crud' element={<Crud/>}/>
             <Route path='/' element={<Home/>}/>
           </Routes>

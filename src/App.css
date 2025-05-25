@@ -42,3 +42,8 @@ body {
   margin-bottom: 50px;
   background-color: rgb(43, 43, 43);
 }
+
+* ::selection{
+  color: white;
+  background: #ECB251;
+}

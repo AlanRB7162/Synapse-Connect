@@ -12,8 +12,9 @@
 
 .input-label label{
   color: #6d5223;
+  background: transparent;
 }
 
-.input-label input:focus~label, .input-label input:valid~label{
+.input-label input:focus~label, .input-label input:not(:placeholder-shown)~label{
   background-color: #F1CA84;
 }

@@ -1,8 +1,12 @@
-import { Button } from "@chakra-ui/react";
+//src/pages/Login/SocialIcons/Google/GoogleLogin.tsx
+
+import { Button, Icon } from "@chakra-ui/react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../../../contexts/AuthContext";
 import axios from "axios";
+import { FaGooglePlusG } from "react-icons/fa6";
+import { ElementType } from "react";
 
 export function CustomGoogleButton() {
   const navigate = useNavigate();
@@ -32,8 +36,8 @@ export function CustomGoogleButton() {
   });
 
   return (
-    <Button id="google-icon-in" onClick={() => googleLogin()}>
-      <i className="fa-brands fa-google-plus-g" />
+    <Button id="google-icon-in" onClick={() => googleLogin()} variant='outline'>
+      <Icon as={FaGooglePlusG as ElementType} className='icon fa-google-plus-g'/>
     </Button>
   );
 }

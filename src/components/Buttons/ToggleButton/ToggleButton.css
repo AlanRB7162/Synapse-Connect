@@ -1,3 +1,5 @@
+/*src/components/Buttons/ToggleButton/ToggleButton.css*/
+
 .toggle-button {
     background: transparent;
     color: rgb(255, 255, 255);
@@ -22,7 +24,7 @@
     justify-content: center;
 }
 
-.login-container .toggle-button .icon {
+.toggle-button .fa-arrow-right {
     background: white;
     margin-left: 1em;
     position: absolute;
@@ -37,20 +39,20 @@
     transition: all 0.3s;
 }
 
-.login-container .toggle-button:hover .icon {
+.toggle-button:hover .fa-arrow-right {
     width: calc(100% - 0.6em);
 }
 
-.login-container .toggle-button .icon svg {
+.toggle-button .fa-arrow-right svg {
     width: 1.1em;
     transition: transform 0.3s;
     color: #6d5223;
 }
 
-.login-container .toggle-button:hover .icon svg {
+.toggle-button:hover .fa-arrow-right svg {
     transform: translateX(0.1em);
 }
 
-.login-container .toggle-button:active .icon {
+.toggle-button:active .fa-arrow-right {
     transform: scale(0.95);
 }

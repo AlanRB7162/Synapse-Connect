@@ -47,7 +47,7 @@ export function Header() {
         )}
         {!user && (
         <Flex className='user-nl-display' id='user-nl-display'>
-          <Button onClick={() => navigate("/login")} id='btLogin' className='btLogin' variant='ghost' p='7px'><Icon as={FaDoorOpen as ElementType} className='icon fa-door-open'/>Entrar</Button>
+          <Button onClick={() => navigate("/entrar")} id='btLogin' className='btLogin' variant='ghost' p='7px'><Icon as={FaDoorOpen as ElementType} className='icon fa-door-open'/>Entrar</Button>
         </Flex>
         )}
       </Flex>

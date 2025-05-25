@@ -1,0 +1,11 @@
+/*src/pages/Login/Toggle/Toggle.css*/
+
+.toggle{
+  background-color: rgba(29, 29, 29, 1);
+}
+
+.toggle-panel h1{
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

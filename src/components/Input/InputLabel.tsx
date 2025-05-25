@@ -14,6 +14,8 @@ interface InputLabelProps {
   maxWidth?: string;
   required?: boolean;
   disabled?: boolean;
+  rightElement?: React.ReactNode;
+  paddingRight?: string;
 }
 
 const InputLabel: React.FC<InputLabelProps> = ({
@@ -25,6 +27,8 @@ const InputLabel: React.FC<InputLabelProps> = ({
   maxWidth = "100%",
   required = false,
   disabled = false,
+  rightElement,
+  paddingRight,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const shouldFloat = isFocused || (value && value.length > 0);
@@ -44,7 +48,8 @@ const InputLabel: React.FC<InputLabelProps> = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         borderRadius="8px"
-        padding="0 1em"
+        paddingLeft="1em"
+        paddingRight={paddingRight ?? (rightElement ? "2.3rem" : "1em")}
         outline= "none"
         size="md"
         width="100%"
@@ -68,6 +73,18 @@ const InputLabel: React.FC<InputLabelProps> = ({
       >
         {label}
       </label>
+      {rightElement && (
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "0.25rem",
+          transform: "translateY(-50%)",
+        }}
+      >
+        {rightElement}
+      </div>
+    )}
     </div>
   );
 };
