@@ -11,12 +11,6 @@
     width: 100%;
 }
 
-@media (max-width:768px){
-    .login-container .sign-up form{
-        background-color: rgba(29, 29, 29, 1) ;
-    } 
-}
-
 .form-container span{
     background: linear-gradient(to right, #F1CA84, #ECB251);
     -webkit-background-clip: text;

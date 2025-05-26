@@ -39,15 +39,21 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
         }
     };
 
+    const transformStyle = {
+        md: isActive ? 'translateX(0)' : 'translateX(-100%)',
+        base: isActive ? 'translateY(0)' : 'translateY(-100%)'
+    };
+
 
     return(
         <Flex className="form-container sign-up" h='100%'
         w={{base:'100%',md:'50%'}} 
-        position={{base: 'absolute', md:'relative'}}
-        transform={isActive ? 'translateX(0)' : 'translateX(-100%)'}
+        position='relative'
+        transform={transformStyle}
         zIndex={isActive ? '3' : '-1'}
         opacity={isActive ? '1' : '0'}
         transition={'all 0.6s ease-in-out'}
+        textAlign='center'
         >
             <form onSubmit={handleRegister}>
                 <Flex className="form-content-sign-up" direction='column' gap={2} 
@@ -84,7 +90,7 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
                         </Flex>
 
                         <Button id="btSign-up" className="button-login button-up" type="submit" 
-                        w='50%' mt='18px' p='10px 45px' borderRadius='30px' transition='0.17s'
+                        w='60%' mt='18px' p='10px 45px' borderRadius='30px' transition='0.17s'
                         background='linear-gradient(to right, #F1CA84, #ECB251)' 
                         color='#fff' fontWeight='750px' letterSpacing='0.5px'
                         >REGISTRE-SE

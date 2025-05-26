@@ -63,12 +63,19 @@ export function FormSignIn({ isActive }: FormSignInProps) {
         }
     };
 
+    const transformStyle = {
+        md: isActive ? 'translateX(100%)' : 'translateX(0)',
+        base: isActive ? 'translateY(0)' : 'translateY(-100%)'
+    };
+
     return(
-        <Flex className="form-container sign-in" 
+        <Flex className="form-container sign-in" h='100%'
         w={{base:'100%',md:'50%'}} 
-        position={{base: 'absolute', md:'relative'}} 
-        transform={isActive ? 'translateX(100%)' : 'translateX(0)'}
+        position='relative'
+        transform={transformStyle}
         transition={'all 0.6s ease-in-out'}
+        justify='center'
+        textAlign='center'
         >
             <form onSubmit={handleLogin}>
                 <Flex className="form-content-sign-in" direction='column' gap={4}
