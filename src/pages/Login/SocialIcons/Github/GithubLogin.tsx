@@ -4,13 +4,17 @@ import { Button, Icon } from "@chakra-ui/react";
 import { ElementType } from "react";
 import { FaGithub } from "react-icons/fa6";
 
+const CLIENT_ID = "Ov23liWwkyOZLTDR9qs2";
+
 //link de autenticação
-const GITHUB_AUTH_URL = "http://localhost:3000/auth/github";
+const redirectUri = "http://localhost:3001/auth/github";
+ const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=read:user`;
+
 
 //Redireciona o usuário para a rota de autenticação do GitHub
 export function CustomGithubButton(){
   const handleLogin = () => {
-    window.location.href = GITHUB_AUTH_URL;
+    window.location.href = githubAuthUrl;
   };
 //retorna o botão pronto
   return(

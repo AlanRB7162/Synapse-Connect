@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import db from './db';
+import axios from "axios";
 
 const app = express();
 app.use(cors());
@@ -58,4 +59,48 @@ app.post("/login", (req, res) => {
       }
     }
   );
+});
+
+
+//github Login features
+const CLIENT_ID_GITHUB = "Ov23liWwkyOZLTDR9qs2";
+const CLIENT_SECRET_GITHUB = "680385149e68946ffc9b37b8c2903ec43ab6441c";
+
+app.get("/auth/github/callback", async (req, res) => {
+  const code = req.query.code;
+
+  try {
+    // Trocar o code por access token
+    const tokenRes = await axios.post(
+      `https://github.com/login/oauth/access_token`,
+      {
+        client_id: CLIENT_ID_GITHUB,
+        client_secret: CLIENT_SECRET_GITHUB,
+        code,
+      },
+      {
+        headers: {
+          accept: "application/json",
+        },
+      }
+    );
+
+    const access_token = tokenRes.data.access_token;
+
+    // Buscar dados do usuário com o token
+    const userRes = await axios.get("https://api.github.com/user", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+
+    // Exemplo: redireciona para frontend com nome no query
+    res.redirect(`http://localhost:3000/?name=${userRes.data.name}`);
+  } catch (err) {
+    res.status(500).json({ error: "Erro na autenticação com GitHub" });
+  }
+});
+
+app.listen(3001, () => {
+  console.log("Servidor backend ouvindo na porta 3001");
 });
