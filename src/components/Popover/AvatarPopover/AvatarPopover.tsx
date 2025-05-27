@@ -1,43 +1,25 @@
-import { Avatar, Button, Circle, Flex, Float, Icon, Popover } from "@chakra-ui/react";
+import { Button, Flex, Icon, Popover } from "@chakra-ui/react";
 import { FaBookOpen, FaRightFromBracket, FaUser } from "react-icons/fa6";
 import { ElementType } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import './AvatarPopover.css'
+import { Avatar } from "../../Avatar/Avatar";
 
 export function AvatarPopover() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
-    const colorPalette = ["red", "blue", "green", "yellow", "purple", "orange"]
-
-    const pickPalette = (name?: string) => {
-      if (!name || name.length === 0) {
-        return "gray"; // cor padrão para nome vazio ou indefinido
-      }
-      const index = name.charCodeAt(0) % colorPalette.length;
-      return colorPalette[index];
-    };
-
-    const handleLogout = () => {
-      logout();                // limpa usuário do contexto + localStorage
-      navigate("/entrar");      // redireciona para login
-    };
+  const handleLogout = () => {
+    logout();                // limpa usuário do contexto + localStorage
+    navigate("/entrar");      // redireciona para login
+  };
 
   return (
     <Popover.Root>
       <Popover.Trigger>
        <Flex className='user-avatar'>
-            <Avatar.Root variant='subtle' shape='full' ml='10px' colorPalette={user?.name ? pickPalette(user.name) : "gray"}>
-              <Avatar.Fallback name={user ? user.name : ""}/>
-              <Float placement="bottom-end" offsetX="1" offsetY="1">
-                <Circle
-                  bg="green.500"
-                  size="8px"
-                  outlineColor="bg"
-                />
-              </Float>
-            </Avatar.Root>
+            <Avatar/>
           </Flex>
       </Popover.Trigger>
       <Popover.Positioner>

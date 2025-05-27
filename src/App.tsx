@@ -11,6 +11,8 @@ import './App.css';
 import './components/Buttons/Button.css'
 import { Home } from './pages/Home/Home';
 import { Nav } from './components/Nav/Nav';
+import { PublicRoute } from './routes/PublicRoute';
+import { NotFound } from './pages/NotFound/NotFound';
 
 function App() {
   useEffect(() => {
@@ -24,9 +26,16 @@ function App() {
         <Nav/>
         <main className="main-container">
           <Routes>
-            <Route path="/entrar" element={<Login/>} />
-            <Route path='/crud' element={<Crud/>}/>
             <Route path='/' element={<Home/>}/>
+            <Route path='*' element={<NotFound/>}/>
+            <Route path="/entrar" 
+              element={
+                <PublicRoute>
+                  <Login/>
+                </PublicRoute>
+              } 
+            />
+            <Route path='/crud' element={<Crud/>}/>
           </Routes>
         </main>
         <Footer/>

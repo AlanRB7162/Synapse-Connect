@@ -1,0 +1,19 @@
+.btVerMais:hover{
+    color: white;
+}
+
+.btVerMais:active{
+    color: #ECB251;
+    background: linear-gradient(to right, #F1CA84, #ECB251);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* quantas linhas quer mostrar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,17 @@
+.cod-nf{
+    background: linear-gradient(to right, #F1CA84, #ECB251);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.nf-bth{
+    background: linear-gradient(to right, #F1CA84, #ECB251);
+    color: #fff;
+    transition: 0.2s;
+}
+
+.nf-bth:active{
+    background: #fff;
+    color: #ECB251;
+}
