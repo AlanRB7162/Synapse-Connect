@@ -104,3 +104,30 @@ app.get("/auth/github/callback", async (req, res) => {
 app.listen(3001, () => {
   console.log("Servidor backend ouvindo na porta 3001");
 });
+
+app.post("/auth/google", (req, res) => {
+  const { googleId, email, nome, fotoPerfil } = req.body;
+
+  db.query("SELECT * FROM GoogleUsuario WHERE email = ?", [email], (err, result: any[]) => {
+    if (err) {
+      console.error("Error verifying Google user:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (result.length > 0) {
+      console.log("Google user already exists:", result[0]);
+      return res.status(200).json({ message: "Successful Google Login", user: result[0] });
+    } else {
+      // Se não existir, insere o usuário
+      db.query("INSERT INTO GoogleUsuario (googleId, email, nome, fotoPerfil) VALUES (?, ?, ?, ?)", [googleId, nome, email, fotoPerfil], (err, insertResult) => {
+        if (err) {
+          console.error("Error inserting Google user: ", err);
+          return res.status(500).json({ error: "Error inserting Google user" });
+        }
+
+        console.log("Google user registered successfully:", { googleId, email, nome, fotoPerfil });
+        res.status(201).json({ message: "Google user registered successfully", user: { googleId, email, nome, fotoPerfil } });
+      });
+    };
+  });
+});
