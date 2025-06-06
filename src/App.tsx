@@ -13,6 +13,7 @@ import { Home } from './pages/Home/Home';
 import { Nav } from './components/Nav/Nav';
 import { PublicRoute } from './routes/PublicRoute';
 import { NotFound } from './pages/NotFound/NotFound';
+import { Sobre } from './pages/Sobre/Sobre';
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
               } 
             />
             <Route path='/crud' element={<Crud/>}/>
+            <Route path='/sobre' element={<Sobre/>}/>
           </Routes>
         </main>
         <Footer/>
