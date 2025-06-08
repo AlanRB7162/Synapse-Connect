@@ -15,23 +15,26 @@ export const pingServer = async () => {
     }
 };
 
-export const registerUser = async (nome: string, email: string, usuario: string, senha: string) => {
+export const registerUser = async (nome: string, email: string, username: string, senha: string) => {
     try {
-        const response = await api.post("/register", { nome, email, usuario, senha });
+        const response = await api.post("/user/register", { nome, email, username, senha });
         console.log("Server response:", response.data.message);
-    } catch (error) {
-        console.error("Error sending data to server: ", error);
+        return response.data;
+    } catch (error: any) {
+        console.error("Error sending data to server: ", error.response?.data || error.message);
+        throw error;
     }
 };
 
 export const loginUser = async (loginInput: string, senha: string) => {
     try {
-        const response = await api.post("/login", { loginInput, senha });
+        const response = await api.post("/user/login", { loginInput, senha });
         console.log("Logged in successfully: ", response.data);
         return response.data;
-    } catch (error) {
-        console.error ("Error logging in: ", error);
+    } catch (error: any) {
+        console.error ("Error logging in: ", error.response?.data || error.message);
         throw error;
     }
 }
+
 export default api;

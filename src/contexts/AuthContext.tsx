@@ -5,19 +5,25 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useCallback,
 } from "react";
 
 // Tipo dos dados do usuário (adicione mais campos conforme necessário)
-type User = {
-  name: string;
-  email: string;
-  picture?: string;
+export type User = {
+  id: number;
+  username: string;
+  nome: string;
+  email: string | null;
+  avatar: string | null;
+  provider: string;
+  providerId: string;
 };
 
 // Tipo do contexto de autenticação
 type AuthContextType = {
   user: User | null;
-  login: (userData: User) => void;
+  token: string | null;
+  login: (userData: User, token: string) => void;
   logout: () => void;
 };
 
@@ -27,32 +33,40 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // Provider com tipagem
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
 
-    if (storedUser && storedUser !== "undefined") {
+    if (storedUser && storedToken && storedToken !== "undefined") {
       try {
         setUser(JSON.parse(storedUser));
+        setToken(storedToken);
       } catch (error) {
-        console.error("Erro ao fazer parse do user no localStorage:", error);
+        console.error("Erro ao carregar user/token do localStorage:", error);
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
       }
     }
   }, []);
 
-  const login = (userData: User) => {
+  const login = useCallback((userData: User, authToken: string) => {
     localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", authToken);
     setUser(userData);
-  };
+    setToken(authToken);
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem("user");
-  };
+    localStorage.removeItem("token");
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

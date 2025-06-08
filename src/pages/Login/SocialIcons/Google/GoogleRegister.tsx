@@ -8,11 +8,11 @@ import axios from "axios";
 import { FaGooglePlusG } from "react-icons/fa6";
 import { ElementType } from "react";
 
-export function LoginGoogleButton() {
+export function RegisterGoogleButton() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const googleLogin = useGoogleLogin({
+  const googleRegister = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const { access_token } = tokenResponse;
@@ -22,21 +22,29 @@ export function LoginGoogleButton() {
             Authorization: `Bearer ${access_token}`,
           },
         });
+        console.log("Google data:", res.data);
 
-        console.log("Usuário logado:", res.data);
+        //Envia os dados para o backend
+        const serverRes = await axios.post("http://localhost:3001/auth/google", {
+          googleId: res.data.sub,
+          nome: res.data.name,
+          email: res.data.email,
+          fotoPerfil: res.data.picture,
+        });
+        console.log("Resposta do servidor:", serverRes.data);
 
-        login(res.data);
-
+        //Atualiza o AuthContexto com os dados retornados e redireciona para a página inicial
+        login(serverRes.data.user);
         navigate("/");
       } catch (err) {
-        console.error("Erro ao buscar dados do usuário:", err);
+        console.error("Google registering error: ", err);
       }
     },
-    onError: () => console.log("Erro no login com Google"),
+    onError: () => console.log("Error registering with Google"),
   });
 
   return (
-    <Button id="google-icon-in" onClick={() => googleLogin()} variant='outline'>
+    <Button id="google-icon-in" onClick={() => googleRegister()} variant='outline'>
       <Icon as={FaGooglePlusG as ElementType} className='icon fa-google-plus-g'/>
     </Button>
   );

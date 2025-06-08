@@ -40,7 +40,7 @@ export function Header() {
         <PesquisarPopover/>
         <Box height='50px' width='1px' bg="gray.300" className='linha'/>
         {user && (
-          <Flex className='user-l-display' id='user-l-display'>
+          <Flex className='user-l-display' id='user-l-display' gap={2}>
             <CarrinhoPopover/>
             <AvatarPopover/>
           </Flex>

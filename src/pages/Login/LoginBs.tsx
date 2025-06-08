@@ -6,13 +6,15 @@ import { FormSignIn } from "./Form/FormSignIn";
 import './Form/Form.css'
 import './Toggle/Toggle.css'
 import './Login.css'
-import { useState } from "react";
 import { ToggleHeader } from "./Toggle/ToggleHeader";
 import { ToggleFooter } from "./Toggle/ToggleFooter";
 
-export function LoginBs(){
-    const [isActive, setIsActive] = useState(false);
+interface LoginBsProps {
+    isActive: boolean;
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export function LoginBs({ isActive, setIsActive }: LoginBsProps){
     return(
         <Flex className='login-container md'  
         display={{base: 'flex', md: 'none'}}
@@ -31,8 +33,8 @@ export function LoginBs(){
                 <Flex className="login-form-content" h='200%' w='100%'
                 direction='column' align='center' justify='center' 
                 position='absolute' overflow='hidden'>
-                    <FormSignUp isActive={isActive}/>
-                    <FormSignIn isActive={isActive}/>
+                    <FormSignUp isActive={isActive} setIsActive={setIsActive}/>
+                    <FormSignIn isActive={isActive} setIsActive={setIsActive}/>
                 </Flex>
             </Flex>
             <ToggleFooter isActive={isActive} onToggle={() => setIsActive(prev => !prev)}/>

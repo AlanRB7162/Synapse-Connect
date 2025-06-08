@@ -6,24 +6,22 @@ import { Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash, FaKey, FaLinkedin, FaMicrosoft, FaUser } from "react-icons/fa6";
 import { loginUser } from "../../../services/api";
 import { useAuth } from "../../../contexts/AuthContext";
-import { CustomGoogleButton } from "../SocialIcons/Google/GoogleLogin";
-import { CustomGithubButton } from "../SocialIcons/Github/GithubLogin";
+import { LoginGoogleButton } from "../SocialIcons/Google/GoogleLogin";
+import { CustomGithubButton } from "../SocialIcons/Github/GithubButton";
 import InputLabel from "../../../components/Input/InputLabel";
 
 type FormSignInProps = {
   isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 
-export function FormSignIn({ isActive }: FormSignInProps) {
+export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
     
     const [loginInput, setLoginInput] = useState("");
     const [senhaIn, setSenhaIn] = useState("");
     
     const [showPassword, setShowPassword] = useState(false);
-
-    const [errorLogin, setErrorLogin] = useState("");
-    const [successLogin, setSuccessLogin] = useState(false);
 
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -32,34 +30,72 @@ export function FormSignIn({ isActive }: FormSignInProps) {
         e.preventDefault();
 
         if (!loginInput || !senhaIn) {
-            setErrorLogin("Preencha todos os campos.");
+            setIsActive(false);
+            navigate("/entrar", {
+                state: {
+                    toast: {
+                        title: "Erro ao fazer login",
+                        description: "Todos os campos devem ser preenchidos",
+                        type: "error"
+                    }
+                }
+            })
             return;
         }
 
         try {
-            const userData = await loginUser(loginInput, senhaIn);
+            const data = await loginUser(loginInput, senhaIn);
+            const {user: rawUser, token } = data;
             
-            const rawUser = userData?.user;
-            if (!rawUser) {
-                throw new Error("Dados do usuário inválidos.");
+            if (!rawUser?.nome || !rawUser?.email || !token) {
+                setIsActive(false);
+                navigate("/entrar", {
+                    state: {
+                        toast: {
+                            title: "Erro ao fazer login",
+                            description: "Ocorreu um erro ao carregar suas informações de login. Por favor, tente novamente.",
+                            type: "error"
+                        }
+                    }
+                })
+                return;
             }
 
             const user = {
-                name: rawUser.nome,
+                id: rawUser.id,
+                nome: rawUser.nome,
+                username: rawUser.username,
                 email: rawUser.email,
-                picture: rawUser.picture,
+                avatar: rawUser.avatar,
+                provider: rawUser.provider,
+                providerId: rawUser.providerId
             };
 
-            login(user);
-            setSuccessLogin(true);
-            setTimeout(() => {
-            navigate("/");
-            }, 1500);
-            setErrorLogin("");
-        } catch (error) {
-            console.error("Erro ao fazer login:", error);
-            setErrorLogin("Falha no login. Verifique seu e-mail e senha.");
-            setSuccessLogin(false);
+            navigate("/", {
+                state: {
+                    toast:{
+                        title: "Login realizado com sucesso!",
+                        description: `Bem-vindo(a) de volta, ${user.username}`,
+                        type: "success"
+                    }
+                }
+            })
+            setTimeout(()=>{
+                login(user, data.token);
+            }, 10);
+        } catch (err: any) {
+            const message = err?.response?.data?.error || "Erro ao fazer login. Tente Novamente."
+            console.error("Erro ao fazer login:", message)
+            setIsActive(false);
+            navigate("/entrar", {
+                state: {
+                    toast:{
+                        title: "Erro ao fazer login",
+                        description: message,
+                        type: "error"
+                    }
+                }
+            })
         }
     };
 
@@ -84,7 +120,7 @@ export function FormSignIn({ isActive }: FormSignInProps) {
                     align='center' w='100%'>
                         <Heading as='h1' fontSize='2em' fontWeight='bold'>Entrar</Heading>
                         <Flex className="social-icons" gap={3}>
-                            <CustomGoogleButton/>
+                            <LoginGoogleButton/>
                             <Button id="microsoft-icon-in" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
                             <CustomGithubButton/>
                             <Button id="linkedin-icon-in" variant='outline'><Icon as={FaLinkedin as ElementType} className='icon fa-linkedin'/></Button>

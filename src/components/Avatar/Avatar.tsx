@@ -1,12 +1,14 @@
-import { AvatarFallback, AvatarRoot, Circle, Float } from "@chakra-ui/react";
+import { AvatarFallback, AvatarImage, AvatarRoot, Circle, Float } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useState } from "react";
 
-type User = {
-  name: string;
+type SimpleUser = {
+  nome: string;
+  avatar?: string | null;
 };
 
 interface AvatarProps {
-  user?: User;
+  user?: SimpleUser;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
@@ -15,24 +17,29 @@ export function Avatar({ size, user }: AvatarProps) {
   const { user: authUser } = useAuth();
   const finalUser = user || authUser;
 
+  const [imageError, setImageError] = useState(false);
+
   const colorPalette = ["red", "blue", "green", "yellow", "purple", "orange"];
 
-  const pickPalette = (name?: string) => {
-    if (!name || name.length === 0) {
-      return "gray";
-    }
-    const index = name.charCodeAt(0) % colorPalette.length;
-    return colorPalette[index];
+  const pickPalette = (nome?: string) => {
+    if (!nome || nome.length === 0) return "gray";
+    return colorPalette[nome.charCodeAt(0) % colorPalette.length];
   };
+
+  const hasAvatar = finalUser?.avatar && !imageError;
 
   return (
     <AvatarRoot
       variant="subtle"
       shape="full"
-      colorPalette={finalUser?.name ? pickPalette(finalUser.name) : "gray"}
+      colorPalette={finalUser?.nome ? pickPalette(finalUser.nome) : "gray"}
       size={size}
     >
-      <AvatarFallback name={finalUser?.name || ""} />
+      {hasAvatar ? (
+        <AvatarImage src={finalUser.avatar ?? undefined} alt={finalUser.nome} onError={() => setImageError(true)}/>
+      ) : (
+        <AvatarFallback name={finalUser?.nome || ""} />
+      )}
       {!user && (
         <Float placement="bottom-end" offsetX="1" offsetY="1">
           <Circle bg="green.500" size="8px" outlineColor="bg" />

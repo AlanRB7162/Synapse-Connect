@@ -5,7 +5,7 @@ export type Curso = {
   imagemUrl: string;
   preco: number;
   autor: {
-    id: string;
     nome: string;
+    avatar?: string | null;
   };
 };

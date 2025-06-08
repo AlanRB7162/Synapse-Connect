@@ -30,7 +30,7 @@ export function CardCurso({ curso, onVerMais, onFavoritar }: CardCursoProps) {
                     <Card.Title fontSize='1xl' truncate>{curso.nome}</Card.Title>
                     <Card.Description fontSize='sm' className="truncate-multiline">{curso.descricao}</Card.Description>
                     <Flex className="autor-curso" align='center' gap={2}>
-                        <Avatar size="xs" user={{ name: curso.autor.nome }}/>
+                        <Avatar size="xs" user={curso.autor}/>
                         <Text className="autor-name" fontSize='sm' color='gray.400'>
                             {curso.autor.nome}
                         </Text>

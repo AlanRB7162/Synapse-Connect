@@ -2,16 +2,20 @@
 
 import { ElementType, useState } from "react";
 import { Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
-import { FaAddressCard, FaAt, FaEye, FaEyeSlash, FaGithub, FaKey, FaLinkedin, FaMicrosoft, FaUser } from "react-icons/fa6";
+import { FaAddressCard, FaAt, FaEye, FaEyeSlash, FaKey, FaLinkedin, FaMicrosoft, FaUser } from "react-icons/fa6";
 import { registerUser } from "../../../services/api";
 import InputLabel from "../../../components/Input/InputLabel";
+import { RegisterGoogleButton } from "../SocialIcons/Google/GoogleRegister";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { CustomGithubButton } from "../SocialIcons/Github/GithubButton";
 
 type FormSignUpProps = {
   isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function FormSignUp({ isActive }: FormSignUpProps) {
-    
+export function FormSignUp({ isActive, setIsActive }: FormSignUpProps) {
     const [nomeUp, setNomeUp] = useState("");
     const [usuarioUp, setUsuarioUp] = useState("");
     const [emailUp, setEmailUp] = useState("");
@@ -19,23 +23,77 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
     
     const [showPassword, setShowPassword] = useState(false);
 
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState(false);
+    const {login} = useAuth();
+
+    const navigate = useNavigate();
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!nomeUp || !emailUp || !usuarioUp || !senhaUp) {
-            setError("Todos os campos são obrigatórios.");
+            setIsActive(true);
+            navigate("/entrar", {
+                state: {
+                    toast: {
+                        title: "Erro ao registrar",
+                        description: "Todos os campos devem ser preenchidos",
+                        type: "error"
+                    }
+                }
+            })
             return;
         }
         try {
-            await registerUser(nomeUp, emailUp, usuarioUp, senhaUp);
-            setSuccess(true);
-            setError("");
-        } catch (error) {
-            console.error("Error registering user:", error);
-            setError("Erro ao registrar. Tente novamente.");
-            setSuccess(false);
+            const data = await registerUser(nomeUp, emailUp, usuarioUp, senhaUp);
+            
+            if (data?.token && data?.user){
+                const user = {
+                    id: data.user.id,
+                    nome: data.user.nome,
+                    username: data.user.username,
+                    email: data.user.email,
+                    avatar: data.user.avatar,
+                    provider: data.user.provider,
+                    providerId: data.user.providerId
+                };
+
+                navigate("/", {
+                    state: {
+                        toast:{
+                            title: "Cadastro realizado com sucesso!",
+                            description: `Seja bem-vindo(a), ${user.username}`,
+                            type: "success"
+                        }
+                    }
+                })
+                setTimeout(()=>{
+                    login(user, data.token);
+                }, 10);
+            } else {
+                setIsActive(false);
+                navigate("/entrar", {
+                    state: {
+                        toast:{
+                            title: "Falha ao realizar login automatico.",
+                            description: "Registro realizado, porém houve problema ao logar automaticamente. Por favor, realize o login com suas credenciais",
+                            type: "warning"
+                        }
+                    }
+                })
+                return;
+            }
+        } catch (err: any) {
+            const message = err?.response?.data?.error || "Erro ao registrar. Tente Novamente."
+            console.error("Erro ao registrar:", message)
+            setIsActive(true);
+            navigate("/entrar", {
+                state: {
+                    toast:{
+                        title: "Erro interno",
+                        description: message,
+                        type: "error"
+                    }
+                }
+            })
         }
     };
 
@@ -43,7 +101,6 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
         md: isActive ? 'translateX(0)' : 'translateX(-100%)',
         base: isActive ? 'translateY(0)' : 'translateY(-100%)'
     };
-
 
     return(
         <Flex className="form-container sign-up" h='100%'
@@ -62,9 +119,9 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
                     align='center' w='100%'>
                         <Heading as='h1' fontSize='2em' fontWeight='bold'>Criar Conta</Heading>
                         <Flex className="social-icons" gap={3}>
+                            <RegisterGoogleButton/>
                             <Button id="microsoft-icon-up" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
-                            <Button id="github-icon-up" variant='outline'><Icon as={FaGithub as ElementType} className='icon fa-github'/></Button>
-                            <Button id="linkedin-icon-up" variant='outline'><Icon as={FaLinkedin as ElementType} className='icon fa-linkedin'/></Button>
+                            <CustomGithubButton/>
                             <Button id="linkedin-icon-up" variant='outline'><Icon as={FaLinkedin as ElementType} className='icon fa-linkedin'/></Button>
                         </Flex>
                         <Text as='span' fontSize='12px' fontWeight='bold'>ou use seu e-mail para cadastro</Text>
@@ -92,11 +149,9 @@ export function FormSignUp({ isActive }: FormSignUpProps) {
                         <Button id="btSign-up" className="button-login button-up" type="submit" 
                         w='60%' mt='18px' p='10px 45px' borderRadius='30px' transition='0.17s'
                         background='linear-gradient(to right, #F1CA84, #ECB251)' 
-                        color='#fff' fontWeight='750px' letterSpacing='0.5px'
+                        color='#fff' fontWeight='750' letterSpacing='0.5px'
                         >REGISTRE-SE
                         </Button>
-                        {/*error && <Text color="red.500">{error}</Text>}
-                        {success && <Text color="green.500">Cadastro realizado com sucesso!</Text>*/}
                     </Flex>
                 </Flex>    
             </form>

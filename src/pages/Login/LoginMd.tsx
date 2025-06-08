@@ -8,11 +8,13 @@ import { ToggleRight } from "./Toggle/ToggleRight";
 import './Form/Form.css'
 import './Toggle/Toggle.css'
 import './Login.css'
-import { useState } from "react";
 
-export function LoginMd(){
-    const [isActive, setIsActive] = useState(false);
+interface LoginMdProps {
+    isActive: boolean;
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export function LoginMd({ isActive, setIsActive }: LoginMdProps){
     return(
         <Flex className='login-container'  
         display={{base: 'none', md: 'flex'}}
@@ -22,8 +24,8 @@ export function LoginMd(){
         align='center'
         justify='center'
         >
-            <FormSignIn isActive={isActive} />
-            <FormSignUp isActive={isActive}/>   
+            <FormSignIn isActive={isActive} setIsActive={setIsActive}/>
+            <FormSignUp isActive={isActive} setIsActive={setIsActive}/>   
 
             <Flex className="toggle-container" left='50%' w='50%'
             zIndex='100' 
