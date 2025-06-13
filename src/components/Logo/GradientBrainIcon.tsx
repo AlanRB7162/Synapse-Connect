@@ -2,9 +2,12 @@
 
 import { Box } from '@chakra-ui/react';
 
-export function GradientBrainIcon() {
+interface GradientBrainIconProps {
+  boxSize?: string | number; // Aceita valores como "40px", 40, etc.
+}
+export function GradientBrainIcon({ boxSize = "40px" }: GradientBrainIconProps) {
   return (
-    <Box boxSize="40px">
+    <Box boxSize={boxSize}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"

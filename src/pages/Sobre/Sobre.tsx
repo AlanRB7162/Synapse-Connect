@@ -5,11 +5,11 @@ export function Sobre() {
     <Flex direction='column'>
         <Flex w="100%"   direction={{ base: 'column', md: 'row' }} justify="space-between" align="center" mb={12}>
           <Image w={{base:"100%", md:'50%'}} objectFit="cover"
-          src='/images/sobre-page/camera-menor (1).png'
+          src='/images/sobre-page/cerebro.png'
           onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null; // evita loop caso a imagem fallback também falhe
-                    target.src = '/images/sobre-page/camera-menor (1).png';
+                    target.src = '/images/sobre-page/cerebro.png';
                 }}
           />
           <Box flex={1} m="15px">
