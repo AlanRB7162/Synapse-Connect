@@ -12,7 +12,7 @@ router.get('/:cursoId', (req, res) => {
     if (err) return res.status(500).json({ error: 'Erro no banco de dados' });
     if (results.length === 0) return res.status(404).json({ error: 'Curso não encontrado' });
 
-    res.json({ url: results[0].video_url });
+    res.json({ url: results[0].url_curso});
   });
 });
 
@@ -23,8 +23,8 @@ router.post('/', (req, res) => {
     return res.status(400).json({ error: 'cursoId e videoUrl são obrigatórios' });
   }
 
-  const query = 'UPDATE cursos SET video_url = ? WHERE id = ?';
-  connection.query(query, [videoUrl, cursoId], (err, result) => {
+  const query = 'UPDATE cursos SET url_curso = ? WHERE id = ?';
+  connection.query(query, [url_curso, cursoId], (err, result) => {
     if (err) return res.status(500).json({ error: 'Erro ao salvar URL no banco' });
     res.status(200).json({ message: 'URL salva com sucesso!' });
   });
