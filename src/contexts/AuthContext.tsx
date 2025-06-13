@@ -16,7 +16,7 @@ export type User = {
   email: string | null;
   avatar: string | null;
   provider: string;
-  providerId: string;
+  providerId: string | null;
 };
 
 // Tipo do contexto de autenticação

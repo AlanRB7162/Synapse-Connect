@@ -6,15 +6,15 @@ import { Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash, FaKey, FaLinkedin, FaMicrosoft, FaUser } from "react-icons/fa6";
 import { loginUser } from "../../../services/api";
 import { useAuth } from "../../../contexts/AuthContext";
-import { LoginGoogleButton } from "../SocialIcons/Google/GoogleLogin";
 import { CustomGithubButton } from "../SocialIcons/Github/GithubButton";
+import CustomGoogleButton from "../SocialIcons/Google/GoogleButton";
 import InputLabel from "../../../components/Input/InputLabel";
+import axios from "axios";
 
 type FormSignInProps = {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
 
 export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
     
@@ -24,7 +24,6 @@ export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
-    const { login } = useAuth();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -39,63 +38,45 @@ export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
                         type: "error"
                     }
                 }
-            })
+            });
             return;
         }
 
         try {
-            const data = await loginUser(loginInput, senhaIn);
-            const {user: rawUser, token } = data;
-            
-            if (!rawUser?.nome || !rawUser?.email || !token) {
+            const response = await axios.post("http://localhost:3001/user/login", {
+                loginInput: loginInput,
+                senha: senhaIn
+            });
+
+            const { token, source } = response.data;
+
+            if (token) {
+                // Redireciona programaticamente para a rota, passando o token como query param
+                navigate(`/entrar/local?token=${token}&source=${source}`);
+            } else {
                 setIsActive(false);
                 navigate("/entrar", {
                     state: {
                         toast: {
-                            title: "Erro ao fazer login",
-                            description: "Ocorreu um erro ao carregar suas informações de login. Por favor, tente novamente.",
-                            type: "error"
-                        }
-                    }
-                })
-                return;
+                        title: "Erro ao fazer login",
+                        description: "Ocorreu um problema ao processar seu login. Tente novamente.",
+                        type: "error",
+                        },
+                    },
+                });
             }
-
-            const user = {
-                id: rawUser.id,
-                nome: rawUser.nome,
-                username: rawUser.username,
-                email: rawUser.email,
-                avatar: rawUser.avatar,
-                provider: rawUser.provider,
-                providerId: rawUser.providerId
-            };
-
-            navigate("/", {
-                state: {
-                    toast:{
-                        title: "Login realizado com sucesso!",
-                        description: `Bem-vindo(a) de volta, ${user.username}`,
-                        type: "success"
-                    }
-                }
-            })
-            setTimeout(()=>{
-                login(user, data.token);
-            }, 10);
         } catch (err: any) {
-            const message = err?.response?.data?.error || "Erro ao fazer login. Tente Novamente."
-            console.error("Erro ao fazer login:", message)
+            const toastData = err?.response?.data?.toast;
             setIsActive(false);
             navigate("/entrar", {
                 state: {
-                    toast:{
-                        title: "Erro ao fazer login",
-                        description: message,
-                        type: "error"
-                    }
-                }
-            })
+                    toast: toastData || {
+                        title: "Erro interno",
+                        description: "Erro ao fazer login. Tente novamente.",
+                        type: "error",
+                    },
+                },
+            });
         }
     };
 
@@ -120,9 +101,9 @@ export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
                     align='center' w='100%'>
                         <Heading as='h1' fontSize='2em' fontWeight='bold'>Entrar</Heading>
                         <Flex className="social-icons" gap={3}>
-                            <LoginGoogleButton/>
-                            <Button id="microsoft-icon-in" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
+                            <CustomGoogleButton/>
                             <CustomGithubButton/>
+                            <Button id="microsoft-icon-in" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
                             <Button id="linkedin-icon-in" variant='outline'><Icon as={FaLinkedin as ElementType} className='icon fa-linkedin'/></Button>
                         </Flex>
                         <Text as='span' fontSize='12px' fontWeight='bold'>ou use seu e-mail e senha</Text>

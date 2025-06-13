@@ -7,6 +7,7 @@ interface ToastRedirectOptions {
     description: string;
     type?: "error" | "success" | "warning" | "info";
     to?: string;
+    json?: boolean;
 }
 
 export function redirectWithToast(
@@ -14,11 +15,20 @@ export function redirectWithToast(
     title,
     description,
     type = "error",
-    to = "/entrar"
+    to = "/entrar",
+    json = false
 } : ToastRedirectOptions) {
-    const redirectUrl = new URL(`http://localhost:3000${to}`);
-    redirectUrl.searchParams.set("toastTitle", title);
-    redirectUrl.searchParams.set("toastDescription", description);
-    redirectUrl.searchParams.set("toastType", type);
-    return res.redirect(redirectUrl.toString());
+    if(json) {
+        return res.status(400).json({
+            toast: {
+                title, description, type
+            }
+        });
+    } else {
+        const redirectUrl = new URL(`http://localhost:3000${to}`);
+        redirectUrl.searchParams.set("toastTitle", title);
+        redirectUrl.searchParams.set("toastDescription", description);
+        redirectUrl.searchParams.set("toastType", type);
+        return res.redirect(redirectUrl.toString());
+    }
 }

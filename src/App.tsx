@@ -16,7 +16,8 @@ import { Home } from './pages/Home/Home';
 import { Sobre } from './pages/Sobre/Sobre';
 import { Crud } from './pages/CRUD/CRUD';
 
-import GitHubLogin from './pages/Login/SocialIcons/Github/GithubLogin';
+import LocalLogin from './pages/Login/LocalLogin';
+import SocialLogin from './pages/Login/SocialIcons/SocialLogin';
 
 import { Toaster } from './components/ui/toaster';
 import { ToastListener } from './components/Listener/ToastListener';
@@ -47,7 +48,9 @@ function App() {
                 </PublicRoute>
               } 
             />
-            <Route path='/social-login' element={<GitHubLogin/>}/>
+            <Route path='/entrar/local' element={<LocalLogin/>}/>
+            <Route path='/entrar/github' element={<SocialLogin provider="github"/>}/>
+            <Route path='/entrar/google' element={<SocialLogin provider="google"/>}/>
             <Route path='/crud' element={<Crud/>}/>
             <Route path='/sobre' element={<Sobre/>}/>
           </Routes>

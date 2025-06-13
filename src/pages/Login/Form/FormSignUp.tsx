@@ -3,12 +3,11 @@
 import { ElementType, useState } from "react";
 import { Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { FaAddressCard, FaAt, FaEye, FaEyeSlash, FaKey, FaLinkedin, FaMicrosoft, FaUser } from "react-icons/fa6";
-import { registerUser } from "../../../services/api";
 import InputLabel from "../../../components/Input/InputLabel";
-import { RegisterGoogleButton } from "../SocialIcons/Google/GoogleRegister";
-import { useAuth } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CustomGithubButton } from "../SocialIcons/Github/GithubButton";
+import CustomGoogleButton from "../SocialIcons/Google/GoogleButton";
+import axios from "axios";
 
 type FormSignUpProps = {
   isActive: boolean;
@@ -22,8 +21,6 @@ export function FormSignUp({ isActive, setIsActive }: FormSignUpProps) {
     const [senhaUp, setSenhaUp] = useState("");
     
     const [showPassword, setShowPassword] = useState(false);
-
-    const {login} = useAuth();
 
     const navigate = useNavigate();
 
@@ -42,60 +39,45 @@ export function FormSignUp({ isActive, setIsActive }: FormSignUpProps) {
             })
             return;
         }
-        try {
-            const data = await registerUser(nomeUp, emailUp, usuarioUp, senhaUp);
-            
-            if (data?.token && data?.user){
-                const user = {
-                    id: data.user.id,
-                    nome: data.user.nome,
-                    username: data.user.username,
-                    email: data.user.email,
-                    avatar: data.user.avatar,
-                    provider: data.user.provider,
-                    providerId: data.user.providerId
-                };
+        try{
+            const response = await axios.post("http://localhost:3001/user/register", {
+                nome: nomeUp,
+                username: usuarioUp,
+                email: emailUp,
+                senha: senhaUp,
+            });
 
-                navigate("/", {
-                    state: {
-                        toast:{
-                            title: "Cadastro realizado com sucesso!",
-                            description: `Seja bem-vindo(a), ${user.username}`,
-                            type: "success"
-                        }
-                    }
-                })
-                setTimeout(()=>{
-                    login(user, data.token);
-                }, 10);
+            const { token, source } = response.data;
+
+            if (token) {
+                // Redireciona programaticamente para a rota, passando o token como query param
+                navigate(`/entrar/local?token=${token}&source=${source}`);
             } else {
-                setIsActive(false);
+                setIsActive(true);
                 navigate("/entrar", {
                     state: {
-                        toast:{
-                            title: "Falha ao realizar login automatico.",
-                            description: "Registro realizado, porém houve problema ao logar automaticamente. Por favor, realize o login com suas credenciais",
-                            type: "warning"
-                        }
-                    }
-                })
-                return;
+                        toast: {
+                        title: "Erro ao registrar",
+                        description: "Não foi possível realizar o cadastro.",
+                        type: "error",
+                        },
+                    },
+                });
             }
         } catch (err: any) {
-            const message = err?.response?.data?.error || "Erro ao registrar. Tente Novamente."
-            console.error("Erro ao registrar:", message)
+            const toastData = err?.response?.data?.toast;
             setIsActive(true);
             navigate("/entrar", {
                 state: {
-                    toast:{
+                    toast: toastData || {
                         title: "Erro interno",
-                        description: message,
-                        type: "error"
-                    }
-                }
-            })
+                        description: "Erro ao registrar. Tente novamente.",
+                        type: "error",
+                    },
+                },
+            });
         }
-    };
+    }   
 
     const transformStyle = {
         md: isActive ? 'translateX(0)' : 'translateX(-100%)',
@@ -119,9 +101,9 @@ export function FormSignUp({ isActive, setIsActive }: FormSignUpProps) {
                     align='center' w='100%'>
                         <Heading as='h1' fontSize='2em' fontWeight='bold'>Criar Conta</Heading>
                         <Flex className="social-icons" gap={3}>
-                            <RegisterGoogleButton/>
-                            <Button id="microsoft-icon-up" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
+                            <CustomGoogleButton/>
                             <CustomGithubButton/>
+                            <Button id="microsoft-icon-up" variant='outline'><Icon as={FaMicrosoft as ElementType} className='icon fa-microsoft'/></Button>
                             <Button id="linkedin-icon-up" variant='outline'><Icon as={FaLinkedin as ElementType} className='icon fa-linkedin'/></Button>
                         </Flex>
                         <Text as='span' fontSize='12px' fontWeight='bold'>ou use seu e-mail para cadastro</Text>

@@ -4,7 +4,7 @@ import { Button, Icon } from "@chakra-ui/react";
 import { ElementType } from "react";
 import { FaGithub } from "react-icons/fa6";
 
-const CLIENT_ID = "Ov23liWwkyOZLTDR9qs2";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID_GITHUB;
 
 //link de autenticação
 const redirectUri = "http://localhost:3001/auth/github/callback";

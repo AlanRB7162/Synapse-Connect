@@ -1,3 +1,5 @@
+--//database/db_synapse.sql
+
 create database db_synapse;
 
 use db_synapse;
@@ -12,7 +14,7 @@ CREATE TABLE Usuario (
   provider ENUM('local', 'google', 'github') NOT NULL,
   provider_id VARCHAR(255),
   avatar TEXT,
-  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
 
   -- 🔒 Garantir que provider_id seja único dentro do seu provider
   UNIQUE KEY unique_provider (provider, provider_id),

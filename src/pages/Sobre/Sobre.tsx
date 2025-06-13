@@ -1,4 +1,4 @@
-import { Box, Text, Heading, Stack, Flex, Image } from '@chakra-ui/react';
+import { Box, Text, Heading, Flex, Image } from '@chakra-ui/react';
 
 export function Sobre() {
   return (
@@ -57,7 +57,7 @@ export function Sobre() {
             </Text>
           </Box>
         </Flex>
-        </Flex>
+      </Flex>
   );
 }
 
