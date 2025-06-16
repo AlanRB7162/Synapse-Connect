@@ -1,0 +1,35 @@
+.hero-gradient-text {
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tabs-criar:active{
+  transform: scale(100%) !important;
+}
+
+.tabs-criar:hover{
+  transform: scale(100%);
+}
+
+.hero-animated-bg {
+  background: linear-gradient(-45deg, rgb(39, 39, 39), rgb(19, 19, 19), rgb(39, 39, 39), rgb(19, 19, 19));
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.remover-conteudo:active{
+  transform: scale(97%) !important;
+}
+
+.remover-conteudo:hover{
+  transform: scale(103%);
+  background: linear-gradient(to right, #ff0000, #be0000);
+  color: #fff;
+}

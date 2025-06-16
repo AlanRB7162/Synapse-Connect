@@ -1,0 +1,8 @@
+.btCursosCollapsible:hover{
+    transform: scale(1); 
+    transform-origin: center;
+}
+
+.btCursosCollapsible:active{
+  transform: scale(100%) !important;
+}

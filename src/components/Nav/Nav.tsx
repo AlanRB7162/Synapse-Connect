@@ -20,7 +20,7 @@ export function Nav() {
         <Breadcrumb.List>
           <Breadcrumb.Item>
             <Breadcrumb.Link asChild>
-              <RouterLink to="/">Home</RouterLink>
+              <RouterLink to="/">Início</RouterLink>
             </Breadcrumb.Link>
           </Breadcrumb.Item>
 

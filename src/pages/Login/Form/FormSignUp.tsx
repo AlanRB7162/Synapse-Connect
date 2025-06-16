@@ -79,19 +79,15 @@ export function FormSignUp({ isActive, setIsActive }: FormSignUpProps) {
         }
     }   
 
-    const transformStyle = {
-        md: isActive ? 'translateX(0)' : 'translateX(-100%)',
-        base: isActive ? 'translateY(0)' : 'translateY(-100%)'
-    };
-
     return(
         <Flex className="form-container sign-up" h='100%'
-        w={{base:'100%',md:'50%'}} 
+        w='50%'
         position='relative'
-        transform={transformStyle}
-        zIndex={isActive ? '3' : '-1'}
-        opacity={isActive ? '1' : '0'}
+        transform={isActive ? 'translateX(0)' : 'translateX(-100%)'}
+        zIndex={{base: 0, md: isActive ? '3' : '-1'}}
+        opacity={{base: 1, md: isActive ? '1' : '0'}}
         transition={'all 0.6s ease-in-out'}
+        justify='center'
         textAlign='center'
         >
             <form onSubmit={handleRegister}>

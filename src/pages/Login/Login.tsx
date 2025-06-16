@@ -12,11 +12,10 @@ export function Login(){
     const [isActive, setIsActive] = useState(false);
 
     return(
-        <Flex className='login-page'  
-        maxW="1000px" w='100%' minH={{base:'800px', md:'500px'}}
-        position="relative" overflow="hidden"
-        borderRadius='16px' mt='25px'
-        mx='15px'
+        <Flex className='login-page' w='100%' h="100%" minH={{base:'800px', md:'500px'}}
+        position="relative" overflow="hidden" justify="center" align="center"
+        borderRadius={{base: 0, md: '16px'}} py={{base: 0, md: 5}} px={{base: 0, md: 5}}
+        mx={{base: 0, md: '10px'}} mt={{base: 0, md: 6}}
         >
             <LoginMd isActive={isActive} setIsActive={setIsActive}/>
             <LoginBs isActive={isActive} setIsActive={setIsActive}/>

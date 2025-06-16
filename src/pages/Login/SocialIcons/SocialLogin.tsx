@@ -155,7 +155,7 @@ React.useEffect(() => {
 }, []);
 
   return(
-    <Flex direction='column' align='center' justify='center' h='400px'>
+    <Flex direction='column' align='center' justify='center' h='400px' w="100%" textAlign="center">
       <Icon as={provider === "google" ? FaGooglePlusG : FaSquareGithub} boxSize={20} mb={4}/>
         <Flex align="center" mb={4} w="250px" justify="center">
           <Progress 

@@ -7,7 +7,6 @@ import { jwtDecode } from "jwt-decode";
 import { Flex, Text } from "@chakra-ui/react";
 import { Fade } from "@chakra-ui/transition";
 import React from "react";
-import { Progress } from "../../components/ui/progress";
 import { Logo } from "../../components/Logo/Logo";
 
 type JwtPayload = {
@@ -149,24 +148,8 @@ React.useEffect(() => {
   return () => clearInterval(interval);
 }, []);
 
-const [progress, setProgress] = React.useState(0);
-
-React.useEffect(() => {
-  const interval = setInterval(() => {
-    setProgress((prev) => {
-      if (prev >= 100) {
-        clearInterval(interval);
-        return 100;
-      }
-      return prev + 2;
-    });
-  },100);
-
-  return () => clearInterval(interval);
-}, []);
-
   return(
-    <Flex direction='column' align='center' justify='center' h='400px'>
+    <Flex direction='column' align='center' justify='center' h='400px' w="100%" textAlign="center">
       <Logo/>
         <Text mt={4}>
           {source === "register" ? "Cadastrando sua conta local" : "Realizando login com sua conta local"}

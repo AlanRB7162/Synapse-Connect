@@ -82,12 +82,13 @@ export function FormSignIn({ isActive, setIsActive }: FormSignInProps) {
 
     const transformStyle = {
         md: isActive ? 'translateX(100%)' : 'translateX(0)',
-        base: isActive ? 'translateY(0)' : 'translateY(-100%)'
+        base: isActive ? 'translateX(0)' : 'translateX(-100%)'
     };
 
     return(
         <Flex className="form-container sign-in" h='100%'
-        w={{base:'100%',md:'50%'}} 
+        bgColor='rgb(61, 61, 61)'
+        w='50%'
         position='relative'
         transform={transformStyle}
         transition={'all 0.6s ease-in-out'}

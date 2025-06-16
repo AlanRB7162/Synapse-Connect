@@ -1,0 +1,18 @@
+.uploadfile{
+  color: #6d5223;
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  box-shadow: 3px 5px 0 #bb8e40;
+  border: none;
+  height: 44px;
+  width: 100%;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.uploadfile:hover{
+    transform: scale(102%);
+}
+
+.uploadfile:active{
+    transform: scale(102%) !important;
+}

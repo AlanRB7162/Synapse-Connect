@@ -4,3 +4,7 @@
   background-color: rgb(61, 61, 61);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
 }
+
+.login-container-bs{
+  background-color: rgba(29, 29, 29, 1)
+} 

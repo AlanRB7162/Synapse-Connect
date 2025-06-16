@@ -22,12 +22,12 @@ export function Header() {
     const { user } = useAuth();
 
     return (
-      <Flex as="header" px={8} py={4} align="center" justify="space-between" gap={4} className="header">
+      <Flex as="header" px={8} py={4} align="center" gap={4} className="header">
         <Flex id="logo" align="center" gap={4} flex="1">
           <Logo/>
           <LogoTitle/>
         </Flex>
-        <Flex display={{ base: "none", md: "flex" }}align="center" gap={2} flex="1" minW="260px" className="input-pesquisar">
+        <Flex display={{ base: "none", md: "flex" }} align="center" gap={2} flex="1" minW="260px" className="input-pesquisar">
           <Icon as={FaMagnifyingGlass as ElementType} className="icon fa-magnifying-glass"/>
           <InputLabel
             id="pesquisa"
@@ -37,7 +37,9 @@ export function Header() {
           />
           <ButtonX onClear={()=> setSearch("")}/>
         </Flex>
-        <PesquisarPopover/>
+        <Flex display={{base:"flex", md:"none"}}>
+          <PesquisarPopover/>
+        </Flex>
         <Box height='50px' width='1px' bg="gray.300" className='linha'/>
         {user && (
           <Flex className='user-l-display' id='user-l-display' gap={2}>

@@ -1,12 +1,12 @@
 /*src/pages/Login/Form/Form.css*/
 
-.login-container form{
+.form-container form{
     background-color: rgb(61, 61, 61);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0 20px;
     height: 100%;
     width: 100%;
 }

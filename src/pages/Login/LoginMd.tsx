@@ -20,7 +20,7 @@ export function LoginMd({ isActive, setIsActive }: LoginMdProps){
         display={{base: 'none', md: 'flex'}}
         maxW="1000px" w='100%' minH='500px'
         position="relative" overflow="hidden"
-        borderRadius='16px'
+        borderRadius='16px' maxH="1000px"
         align='center'
         justify='center'
         >

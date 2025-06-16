@@ -4,8 +4,6 @@
     background: linear-gradient(to right, #F1CA84, #ECB251);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    font-size: 2rem !important; /* ajuste conforme necessário */
 }
 
 .gradient-text:last-child {

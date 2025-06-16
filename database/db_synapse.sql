@@ -1,4 +1,4 @@
---//database/db_synapse.sql
+-- //database/db_synapse.sql
 
 create database db_synapse;
 
@@ -23,20 +23,36 @@ CREATE TABLE Usuario (
   UNIQUE KEY unique_email_provider (provider, email)
 );
 
--- 📚 Cursos
-CREATE TABLE Cursos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    descricao VARCHAR(255),
-    autor INT,
-    valor DECIMAL(10,2),    
-    FOREIGN KEY (autor) REFERENCES Usuario(id)
-);
-
 -- 🏷️ Categorias
 CREATE TABLE Categoria (
   id INT PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Nivel (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- 📚 Cursos
+CREATE TABLE Cursos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    descricao VARCHAR(400),
+    autor INT,
+    valor DECIMAL(7,2) NOT NULL,
+    nivel_id INT,
+    capa_url TEXT DEFAULT NULL,
+    FOREIGN KEY (autor) REFERENCES Usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (nivel_id) REFERENCES Nivel(id) ON DELETE SET NULL
+);
+
+CREATE TABLE VideoAula (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  curso INT,
+  videoId VARCHAR(255) NOT NULL,
+  ordem INT,
+  FOREIGN KEY (curso) REFERENCES Cursos(id) ON DELETE CASCADE
 );
 
 -- 🔗 Relação entre curso e categoria
@@ -44,15 +60,15 @@ CREATE TABLE Curso_Categoria (
   curso INT,
   categoria INT,
   PRIMARY KEY (curso, categoria),
-  FOREIGN KEY (curso) REFERENCES Cursos(id),
-  FOREIGN KEY (categoria) REFERENCES Categoria(id)
+  FOREIGN KEY (curso) REFERENCES Cursos(id) ON DELETE CASCADE,
+  FOREIGN KEY (categoria) REFERENCES Categoria(id) ON DELETE CASCADE
 );
 
 -- 🧾 Pedidos
 CREATE TABLE Pedido (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuario INT,
-    FOREIGN KEY (usuario) REFERENCES Usuario(id)
+    FOREIGN KEY (usuario) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
 -- 🛒 Cursos por pedido
@@ -60,13 +76,40 @@ CREATE TABLE Pedido_has_Cursos (
     pedido INT,
     curso INT,
     PRIMARY KEY (pedido, curso),
-    FOREIGN KEY (pedido) REFERENCES Pedido(id),
-    FOREIGN KEY (curso) REFERENCES Cursos(id)
+    FOREIGN KEY (pedido) REFERENCES Pedido(id) ON DELETE CASCADE,
+    FOREIGN KEY (curso) REFERENCES Cursos(id) ON DELETE CASCADE
 );
 
+INSERT INTO Categoria (nome) VALUES
+('Lógica de Programação'),
+('HTML'),
+('CSS'),
+('JS'),
+('React'),
+('Node.js'),
+('PHP'),
+('Java'),
+('Python'),
+('Flutter'),
+('React Native'),
+('Android'),
+('iOS'),
+('MySQL'),
+('MongoDB'),
+('PostgreSQL');
+
+INSERT INTO Nivel (nome) VALUES
+('Iniciante'),
+('Básico'),
+('Intermediário'),
+('Avançado'),
+('Especialista');
+
+-- Consultas para teste (opcional)
 SELECT * FROM Usuario;
 SELECT * FROM Cursos;
 SELECT * FROM Categoria;
+SELECT * FROM Nivel;
 SELECT * FROM Curso_Categoria;
 SELECT * FROM Pedido;
 SELECT * FROM Pedido_has_Cursos;

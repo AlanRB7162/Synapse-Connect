@@ -10,7 +10,7 @@ export function PesquisarPopover() {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <Button display={{base:"flex", md:"none"}} id='btPesquisar' variant='ghost'><Icon as={FaMagnifyingGlass as ElementType} className='icon fa-magnifying-glass'/></Button>
+        <Button id='btPesquisar' variant='ghost'><Icon as={FaMagnifyingGlass as ElementType} className='icon fa-magnifying-glass'/></Button>
       </Popover.Trigger>
       <Popover.Positioner>
         <Popover.Content>

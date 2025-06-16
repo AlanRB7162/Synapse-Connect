@@ -1,0 +1,13 @@
+.select-trigger{
+  color: #6d5223;
+  background: linear-gradient(to right, #F1CA84, #ECB251);
+  box-shadow: 3px 5px 0 #bb8e40;
+}
+
+.select-trigger:hover{
+    transform: scale(100%);
+}
+
+.select-trigger:active{
+    transform: scale(100%) !important;
+}

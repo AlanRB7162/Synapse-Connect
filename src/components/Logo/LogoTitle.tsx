@@ -10,7 +10,8 @@ export function LogoTitle() {
         as="h2"
         size="md"
         className="gradient-text"
-        fontSize={{ base: 'lg', md: 'xl' }}
+        fontSize='2rem'
+        fontWeight="bold"
       >
         SYNAPSE
       </Heading>
@@ -18,7 +19,8 @@ export function LogoTitle() {
         as="h2"
         size="md"
         className="gradient-text"
-        fontSize={{ base: 'lg', md: 'xl' }}
+        fontSize='2rem'
+        fontWeight="bold"
       >
         CONNECT
       </Heading>

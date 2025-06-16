@@ -1,12 +1,12 @@
 /*src/components/Input/InputLabel.css*/
 
-.input-label input{
+.input-label input, textarea{
   color: #6d5223;
   background: linear-gradient(to right, #F1CA84, #ECB251);
   box-shadow: 3px 5px 0 #bb8e40;
 }
 
-.input-label input::selection{
+.input-label input::selection, textarea::selection{
   color: white;
 }
 
@@ -16,5 +16,9 @@
 }
 
 .input-label input:focus~label, .input-label input:not(:placeholder-shown)~label{
+  background-color: #F1CA84;
+}
+
+.input-label textarea:focus~label, .input-label textarea:not(:placeholder-shown)~label{
   background-color: #F1CA84;
 }

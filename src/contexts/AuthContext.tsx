@@ -25,6 +25,7 @@ type AuthContextType = {
   token: string | null;
   login: (userData: User, token: string) => void;
   logout: () => void;
+  isAuthLoading: boolean;
 };
 
 // Criar o contexto com tipo genérico
@@ -34,22 +35,35 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
-
-    if (storedUser && storedToken && storedToken !== "undefined") {
+    const loadUserFromStorage = () => {
       try {
-        setUser(JSON.parse(storedUser));
-        setToken(storedToken);
+        const storedUser = localStorage.getItem("user");
+        const storedToken = localStorage.getItem("token");
+
+        if (storedUser && storedToken && storedToken !== "undefined") {
+          try {
+            setUser(JSON.parse(storedUser));
+            setToken(storedToken);
+          } catch (error) {
+            console.error("Erro ao carregar user/token do localStorage:", error);
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+          }
+        } 
       } catch (error) {
         console.error("Erro ao carregar user/token do localStorage:", error);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+      } finally {
+        setIsAuthLoading(false);
       }
     }
-  }, []);
+
+    loadUserFromStorage();
+}, []);
 
   const login = useCallback((userData: User, authToken: string) => {
     localStorage.setItem("user", JSON.stringify(userData));
@@ -66,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isAuthLoading }}>
       {children}
     </AuthContext.Provider>
   );
