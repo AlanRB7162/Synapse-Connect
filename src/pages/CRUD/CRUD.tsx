@@ -3,28 +3,37 @@
 import { Button, Flex, Table } from "@chakra-ui/react";
 import InputLabel from "../../components/Input/InputLabel";
 import { useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 export function Crud(){
     const [id, setID] = useState("");
     const [nome, setNome] = useState("");
-    const [endereco, setEndereco] = useState("");
-    const [cidade, setCidade] = useState("");
+    const [email, setEmail] = useState("");
+    const [provedor, setProvedor] = useState("");
+    const [idprovedor, setIDProvedor] = useState("");
+    const [avatar, setAvatar] = useState("");
+    const [criado_em, setCriado_em] = useState("");
 
     const [modoEdicao, setModoEdicao] = useState(false);
 
     const handleNovo = () => {
         setID("");
         setNome("");
-        setEndereco("");
-        setCidade("");
+        setEmail("");
+        setProvedor("");
+        setIDProvedor("");
+        setAvatar("");
+        setCriado_em("");
         setModoEdicao(true);
+        
     };
 
     const handleEditar = () => {
         if (clienteSelecionado) {
             setID(clienteSelecionado.id.toString());
             setNome(clienteSelecionado.nome);
-            setCidade(clienteSelecionado.cidade);
+            setProvedor(clienteSelecionado.provedor);
+            setAvatar(clienteSelecionado.avatar);
             setModoEdicao(true);
         }
     };
@@ -32,8 +41,8 @@ export function Crud(){
     const handleCancelar = () => {
         setID("");
         setNome("");
-        setEndereco("");
-        setCidade("");
+        setEmail("");
+        setAvatar("");
         setModoEdicao(false);
     };
 
@@ -46,7 +55,8 @@ export function Crud(){
 
 
     return(
-        <Flex className="crud" gap={10} justify="space-between">
+        
+        <Flex align="center" className="crud" gap={10} justify="center" w="100%" p={12}>
             <Flex direction="column" gap={4} className="form">
                 <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-id">
                 <InputLabel
@@ -55,7 +65,7 @@ export function Crud(){
                     value={id}
                     onChange={(e) => setID(e.target.value)}
                     required
-                    disabled={!modoEdicao}
+                    disabled={true}
                 />
                 </Flex>
 
@@ -72,10 +82,10 @@ export function Crud(){
 
                 <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-endereco">
                 <InputLabel
-                    id="endereco"
-                    label="Endereço"
-                    value={endereco}
-                    onChange={(e) => setEndereco(e.target.value)}
+                    id="email"
+                    label="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={!modoEdicao}
                 />
@@ -83,14 +93,45 @@ export function Crud(){
 
                 <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-cidade">
                 <InputLabel
-                    id="cidade"
-                    label="Cidade"
-                    value={cidade}
-                    onChange={(e) => setCidade(e.target.value)}
+                    id="provedor"
+                    label="Provedor"
+                    value={provedor}
+                    onChange={(e) => setProvedor(e.target.value)}
                     required
-                    disabled={!modoEdicao}
+                    disabled={true}
                 />
                 </Flex>
+                <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-cidade">
+                <InputLabel
+                    id="idprovedor"
+                    label="IDProvedor"
+                    value={provedor}
+                    onChange={(e) => setIDProvedor(e.target.value)}
+                    required
+                    disabled={true}
+                />
+                </Flex>
+                <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-cidade">
+                <InputLabel
+                    id="avatar"
+                    label="Avatar"
+                    value={provedor}
+                    onChange={(e) => setAvatar(e.target.value)}
+                    required
+                    disabled={true}
+                />
+                </Flex>
+                <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-cidade">
+                <InputLabel
+                    id="criado_em"
+                    label="Criado em"
+                    value={criado_em}
+                    onChange={(e) => setCriado_em(e.target.value)}
+                    required
+                    disabled={true}
+                />
+                </Flex>
+
 
                 {!modoEdicao &&(
                 <Flex display="flex" align="center" gap={2} flex="1" minW="260px" className="input-cidade">
@@ -108,42 +149,76 @@ export function Crud(){
                 )}
             </Flex>
             <Flex className="list">
-                <Table.Root size="lg" showColumnBorder interactive variant="outline" borderRadius="8px" bg="transparent">
+                <Table.Root size="lg" showColumnBorder interactive variant="outline" borderRadius="12px" boxShadow="md" borderColor="gray.200"bg="transparent">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeader px="6" py="4">ID</Table.ColumnHeader>
                             <Table.ColumnHeader px="6" py="4">Nome</Table.ColumnHeader>
-                            <Table.ColumnHeader px="6" py="4">Cidade</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">Email</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">Provedor</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">IDProvedor</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">Avatar</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">Criado em</Table.ColumnHeader>
+                            <Table.ColumnHeader px="6" py="4">Ações</Table.ColumnHeader>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {clientes.map((cliente) => {
 
                             return(
-                                <Table.Row 
-                                key={cliente.id} 
-                                onClick={() => {
-                                    if (!modoEdicao) {
-                                        setLinhaSelecionadaId(cliente.id);
-                                        setClienteSelecionado(cliente);
-                                    }
-                                }}
-                                bg={cliente.id === linhaSelecionadaId ? "blue.100" : "transparent"}
-                                cursor={modoEdicao ? "not-allowed" : "pointer"}
-                                _hover={{ bg: modoEdicao ? "transparent" : "blue.50" }}
+                                <><Table.Row
+                                    key={cliente.id}
+                                    onClick={() => {
+                                        if (!modoEdicao) {
+                                            setLinhaSelecionadaId(cliente.id);
+                                            setClienteSelecionado(cliente);
+                                        }
+                                    } }
+                                    bg={cliente.id === linhaSelecionadaId ? "yellow.500" : "transparent"}
+                                    cursor={modoEdicao ? "not-allowed" : "pointer"}
+                                    _hover={{ bg: modoEdicao ? "transparent" : "yellow.200" }}
                                 >
                                     <Table.Cell px="6" py="4">{cliente.id}</Table.Cell>
                                     <Table.Cell px="6" py="4">{cliente.nome}</Table.Cell>
                                     <Table.Cell px="6" py="4">{cliente.cidade}</Table.Cell>
-                                </Table.Row>
-                            );
-                        })}
-                    </Table.Body>
-                </Table.Root>
-            </Flex>
-        </Flex>
-    )
-}
+                                    </Table.Row>
+                                    <Table.Cell px="6" py="4">
+                            <Flex gap={2}>
+                                <Button
+                                    size="sm"
+                                    colorScheme="yellow"
+                                    variant="ghost"
+                                    onClick={() => {
+                                        setLinhaSelecionadaId(cliente.id);
+                                        setClienteSelecionado(cliente);
+                                        handleEditar(); 
+                                    } }
+                                >
+                                <FaEdit />
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    colorScheme="red"
+                                    variant="ghost"
+                                    onClick={() => {
+                                        const confirmar = window.confirm("Tem certeza que deseja excluir este usuário?");
+                                        if (confirmar) {                                       
+                                        alert(`Usuário ${cliente.nome} excluído com sucesso!`);
+                                    }
+                                            } }
+                            >
+                                    <FaTrash />
+                                </Button>
+                                </Flex>
+                         </Table.Cell></>
+                                );
+                             })}
+                     </Table.Body>
+                 </Table.Root>
+              </Flex>
+          </Flex>
+     )
+  }
 
 const clientes = [
   { id: 1, nome: "Laptop", cidade: "Electronics", price: 999.99 },

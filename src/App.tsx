@@ -27,6 +27,7 @@ import { ToastListener } from './components/Listener/ToastListener';
 
 import './App.css';
 import './components/Buttons/Button.css'
+import { Perfil } from './pages/Perfil/Perfil';
 
 function App() {
   useEffect(() => {
@@ -61,6 +62,7 @@ function App() {
               }/>
             <Route path='/sobre' element={<Sobre/>}/>
             <Route path='/crud' element={<Crud/>}/>
+            <Route path='/perfil' element={<Perfil/>}/>
           </Routes>
         </Flex>
         <Footer/>
