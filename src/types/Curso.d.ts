@@ -8,4 +8,6 @@ export type Curso = {
     nome: string;
     avatar?: string | null;
   };
+  nivel?: string;
+  categorias?: string[];
 };

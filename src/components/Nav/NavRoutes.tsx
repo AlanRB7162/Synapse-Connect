@@ -16,10 +16,6 @@ export function NavRoutes(){
                 <Icon as={FaCircleInfo as ElementType}/>
                 Sobre
                 </Button>
-            <Button variant='outline' w="95%">Sobre</Button>
-            <Button variant='outline' w="95%">Sobre</Button>
-            <Button variant='outline' w="95%">Sobre</Button>
-            <Button variant='outline' w="95%">Sobre</Button>
         </Flex>
     )
 }

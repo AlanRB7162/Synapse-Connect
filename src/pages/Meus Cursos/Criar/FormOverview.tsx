@@ -5,6 +5,7 @@ import { CursoDados } from "./FormDados";
 import { VideoAula } from "./FormConteudo";
 import axios from "axios";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface FormOverviewProps {
     dados: CursoDados | null;
@@ -30,11 +31,14 @@ export function FormOverview({ onVoltar, dados, videos }: FormOverviewProps){
 
     const user = useAuth();
 
+    const navigate = useNavigate();
+
     async function handleFinalizar(){
         try{
             let formData: FormData | null = null;
             
-            const userId = user?.user?.id
+            const userId = user?.user?.id;
+            let capaValida = true;
 
             let dataToSend: any = {
                 nome: dados?.nomeCurso,
@@ -43,30 +47,51 @@ export function FormOverview({ onVoltar, dados, videos }: FormOverviewProps){
                 preco: dados?.preco,
                 categorias: dados?.categoria,
                 videos: videos.map((v) => ({ videoId: v.videoId })),
-                autor: userId
+                autor: userId,
+                capa: null,
             };
 
-            if (dados && typeof dados.capa !== "string" && dados.capa instanceof File) {
-                formData = new FormData();
-                formData.append("capa", dados.capa);
-                for (const key in dataToSend) {
-                    formData.append(key, JSON.stringify(dataToSend[key]));
-                }
-            } else {
-                dataToSend.capa = dados?.capa; // string (URL)
+            if (dados?.tipo === "url") {
+                // Se a capa for uma URL válida
+                dataToSend.capa = dados?.capa;
+            } else if (dados?.tipo === "upload") {
+                console.log("capa invalida")
+                // Capa é um File (blob), mas queremos ignorar e avisar o usuário
+                capaValida = false;
             }
 
-            const response = await axios.post("http://localhost:3001/cursos/criar", formData || dataToSend, {
+            const response = await axios.post("http://localhost:3001/cursos/criar", dataToSend, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    ...(formData ? { "Content-Type": "multipart/form-data" } : { "Content-Type": "application/json" }),
+                    "Content-Type": "application/json",
                 },
-            });
-            // TODO: Criar rota /cursos/criar no backend
-            // TODO: Redirecionar ou mostrar toast após sucesso
+            });;
+            
+            
+            if (response.status === 200 || response.status === 201) {
+                navigate("/meu-perfil", {
+                    state: {
+                        toast: {
+                            title: "Curso criado com sucesso",
+                            description: capaValida
+                                ? "Seu curso foi criado com sucesso!"
+                                : "Seu curso foi criado com sucesso, mas não foi possível armazenar a imagem de capa.",
+                            type: capaValida ? "success" : "warning",
+                        },
+                    },
+                });
+            }
         } catch (error) {
             console.error("Erro ao criar curso:", error);
-            // TODO: Exibir toast de erro
+            navigate("/meus-cursos/criar", {
+                state: {
+                    toast: {
+                        title: "Erro ao criar curso",
+                        description: "Ocorreu um erro ao tentar criar o curso. Tente novamente.",
+                        type: "error"
+                    }
+                }
+            })
         }
     }
 

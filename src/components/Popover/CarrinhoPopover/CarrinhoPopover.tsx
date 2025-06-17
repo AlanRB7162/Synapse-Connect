@@ -1,6 +1,6 @@
-import { Button, Icon, Popover } from "@chakra-ui/react";
+import { Button, Icon, Popover, Text } from "@chakra-ui/react";
 import { ElementType } from "react";
-import { FaBagShopping, FaCartShopping } from "react-icons/fa6";
+import { FaBagShopping, FaCartShopping, FaGears } from "react-icons/fa6";
 
 export function CarrinhoPopover() {
   return (
@@ -16,7 +16,11 @@ export function CarrinhoPopover() {
           </Popover.Arrow>
           <Popover.Body className="popover-carrinho popover-body">
             {/*ADICIONAR AQUI CONTEÚDO DO CARRINHO*/}
-            <Button id="btSair" className="user-avatar-button btSair" variant='outline' width='100%'><Icon as={FaCartShopping as ElementType} className='icon fa-cart-shopping'/>Ir para o Carrinho</Button>
+            <Button id="btCarrinho" className="user-avatar-button" flex={1} variant='outline' width='100%' p="5px" px={5}>
+                <Icon as={FaCartShopping as ElementType}/>
+                <Text flex="1" textAlign="center">Ir para o Carrinho</Text>
+                <Icon as={FaGears as ElementType}/>
+            </Button>
           </Popover.Body>
         </Popover.Content>
       </Popover.Positioner>

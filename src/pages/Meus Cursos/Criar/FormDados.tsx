@@ -167,7 +167,7 @@ export function FormDados({ onAvancar }: FormDadosProps){
             <Flex direction="column" gap={2}>
                 <Flex className="input-criar input-nome" align='center' gap={2} w='100%'>
                     <Icon as={FaPenToSquare as ElementType} className='icon'/>
-                    <InputLabel id="inpCriar-nome" label="Nome do Curso" required
+                    <InputLabel id="inpCriar-nome" label="Nome do Curso" required maxLength={100}
                     value={nomeCurso} onChange={(e) => setNomeCurso(e.target.value)}/>
                 </Flex>
                 <Text color="gray.500" fontSize="xs" ml={6}>*obrigatório</Text>
@@ -176,7 +176,7 @@ export function FormDados({ onAvancar }: FormDadosProps){
             <Flex className="input-criar input-desc" align='center' gap={2} w='100%' mt={4}>
                 <Icon as={FaComment as ElementType} className='icon'/>
                 <InputLabel id="inpCriar-desc" label="Descrição do Curso" required isTextarea
-                value={descCurso} onChange={(e) => setDescCurso(e.target.value)}/>
+                value={descCurso} onChange={(e) => setDescCurso(e.target.value)} maxLength={400}/>
             </Flex>
 
             <Flex align="center" justify="space-between" w="100%" gap={{base: 2, md: 6, lg: 10}} mt={2} direction={{base: "column", md: "row"}}>

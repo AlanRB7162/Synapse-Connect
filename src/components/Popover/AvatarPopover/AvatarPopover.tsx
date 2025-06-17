@@ -48,7 +48,7 @@ export function AvatarPopover() {
           <Popover.Body className="popover-body">
             <Flex direction="column" justify="center" width="100%" padding="4" gap="2">
             <Text fontSize="lg" fontWeight="bolder">Olá, {formatarNome(user.user?.nome)}!</Text>
-                <Button id="btPerfil" className="user-avatar-button btPerfil" variant='outline' width='100%' p="5px" px={10}>
+                <Button id="btPerfil" className="user-avatar-button btPerfil" variant='outline' width='100%' p="5px" px={10} onClick={() => navigate("meu-perfil")}>
                   <Icon as={FaUser as ElementType} className='icon fa-user'/>
                   <Text flex="1" textAlign="center">Meu Perfil</Text>
                 </Button>

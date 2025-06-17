@@ -28,6 +28,7 @@ import { ToastListener } from './components/Listener/ToastListener';
 import './App.css';
 import './components/Buttons/Button.css'
 import { Perfil } from './pages/Perfil/Perfil';
+import { Conteudo } from './pages/Cursos/Conteudo/Conteudo';
 
 function App() {
   useEffect(() => {
@@ -55,14 +56,23 @@ function App() {
             <Route path='/entrar/local' element={<LocalLogin/>}/>
             <Route path='/entrar/github' element={<SocialLogin provider="github"/>}/>
             <Route path='/entrar/google' element={<SocialLogin provider="google"/>}/>
+            <Route path='/curso/:id/conteudo' element={
+              <PrivateRoute>
+                <Conteudo/>
+              </PrivateRoute>
+            }/>
             <Route path='/meus-cursos/criar' element={
               <PrivateRoute>  
                 <CriarCurso/>
               </PrivateRoute>
               }/>
+            <Route path='/meu-perfil' element={
+              <PrivateRoute>  
+                <Perfil/>
+              </PrivateRoute>
+                }/>
+            <Route path='/perfil/:username' element={<Perfil/>}/>
             <Route path='/sobre' element={<Sobre/>}/>
-            <Route path='/crud' element={<Crud/>}/>
-            <Route path='/perfil' element={<Perfil/>}/>
           </Routes>
         </Flex>
         <Footer/>

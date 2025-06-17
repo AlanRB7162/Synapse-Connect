@@ -1,6 +1,6 @@
 import { Box, Button, Collapsible, Flex, Icon, Text } from "@chakra-ui/react";
 import { ElementType, useState } from "react";
-import { FaBook, FaBookOpen, FaChevronDown, FaChevronRight, FaPlus, FaScrewdriverWrench } from "react-icons/fa6";
+import { FaBook, FaBookOpen, FaChevronDown, FaChevronRight, FaGears, FaPlus, FaScrewdriverWrench } from "react-icons/fa6";
 import './CursosCollapsible.css'
 import { useNavigate } from "react-router-dom";
 
@@ -38,7 +38,8 @@ export function CursosCollapsible(){
             </Flex>
             <Flex gap={4} align="center" pr={4}>
                 <Icon as={FaChevronRight as ElementType}/>
-                <Button id="btAddCurso" className="user-avatar-button btAddCurso" flex={1} variant='outline' width='100%' p="5px" px={5} mb={2}>
+                <Button id="btAddCurso" className="user-avatar-button btAddCurso" flex={1} variant='outline' width='100%' p="5px" px={5} mb={2}
+                onClick={()=>navigate("/meu-perfil")}>
                     <Icon as={FaScrewdriverWrench as ElementType}/>
                     <Text flex="1" textAlign="center">Cursos Criados</Text>
                 </Button>
@@ -48,6 +49,7 @@ export function CursosCollapsible(){
                 <Button id="btAddCurso" className="user-avatar-button btAddCurso" flex={1} variant='outline' width='100%' p="5px" px={5}>
                     <Icon as={FaBookOpen as ElementType}/>
                     <Text flex="1" textAlign="center">Cursos Comprados</Text>
+                    <Icon as={FaGears as ElementType}/>
                 </Button>
             </Flex>
         </Collapsible.Content>

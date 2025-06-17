@@ -8,6 +8,8 @@ import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import categoriaRoutes from "./routes/categoria.routes";
 import nivelRoutes from "./routes/nivel.routes";
+import cursosRoutes from "./routes/cursos.routes";
+import conteudosRoutes from "./routes/conteudo.routes";
 import chalk from 'chalk';
 
 dotenv.config();
@@ -20,6 +22,8 @@ app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/categoria", categoriaRoutes);
 app.use("/nivel", nivelRoutes);
+app.use("/cursos", cursosRoutes);
+app.use("/conteudos", conteudosRoutes);
 
 // Teste de conexão com o banco
 app.get("/ping", (req, res) => {

@@ -27,19 +27,6 @@ export function Header() {
           <Logo/>
           <LogoTitle/>
         </Flex>
-        <Flex display={{ base: "none", md: "flex" }} align="center" gap={2} flex="1" minW="260px" className="input-pesquisar">
-          <Icon as={FaMagnifyingGlass as ElementType} className="icon fa-magnifying-glass"/>
-          <InputLabel
-            id="pesquisa"
-            label="Pesquisar"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <ButtonX onClear={()=> setSearch("")}/>
-        </Flex>
-        <Flex display={{base:"flex", md:"none"}}>
-          <PesquisarPopover/>
-        </Flex>
         <Box height='50px' width='1px' bg="gray.300" className='linha'/>
         {user && (
           <Flex className='user-l-display' id='user-l-display' gap={2}>

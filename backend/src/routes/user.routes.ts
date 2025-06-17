@@ -322,4 +322,53 @@ router.delete('/delete', async (req, res) => {
 
 });
 
+router.get('/:identificador', async (req, res) => {
+  const { identificador } = req.params;
+
+  try {
+    let query = '';
+    let params: (string | number)[] = [];
+
+    if (/^\d+$/.test(identificador)) {
+      // identificador é só dígitos, tratar como id numérico
+      query = `SELECT id, nome, username, email, avatar, provider FROM Usuario WHERE id = ?`;
+      params = [Number(identificador)];
+    } else {
+      // tratar como username, lowercase
+      query = `SELECT id, nome, username, email, avatar, provider FROM Usuario WHERE username = ?`;
+      params = [identificador.toLowerCase()];
+    }
+
+    const [rows] = await db.promise().query<any[]>(query, params);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+    }
+
+    return res.json(rows[0]);
+  } catch (err) {
+    console.error('Erro ao buscar usuário:', err);
+    return res.status(500).json({ mensagem: 'Erro interno do servidor' });
+  }
+});
+
+// GET /usuarios/:id/avatar
+router.get('/:id/avatar', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const [rows] = await db.promise().query<any[]>('SELECT avatar FROM Usuario WHERE id = ?', [userId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado' });
+    }
+
+    const avatar = rows[0].avatar;
+    return res.json({ avatar });
+  } catch (err) {
+    console.error('Erro ao buscar avatar do usuário:', err);
+    return res.status(500).json({ mensagem: 'Erro interno do servidor' });
+  }
+});
+
 export default router;

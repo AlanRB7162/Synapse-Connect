@@ -19,6 +19,7 @@ interface InputLabelProps {
   isTextarea?: boolean;
   onlyReal?: boolean;
   maxValue?: number;
+  maxLength?: number;
 }
 
 const InputLabel: React.FC<InputLabelProps> = ({
@@ -35,6 +36,7 @@ const InputLabel: React.FC<InputLabelProps> = ({
   isTextarea = false,
   onlyReal = false,
   maxValue,
+  maxLength,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const shouldFloat = isFocused || (value && value.length > 0) || onlyReal;
@@ -91,16 +93,15 @@ const InputLabel: React.FC<InputLabelProps> = ({
     size: "md" as const,
     width: "100%",
     border: "none",
+    maxLength: maxLength || undefined
   };
-
-  const maxLength = 400;
 
   return (
     <div style={{ position: "relative", width: "100%", maxWidth }} className="input-label">
       {isTextarea ? (
         <>
           <Textarea {...inputCommonProps} rows={4} autoresize resize="none" p={3} pb={8} maxLength={maxLength}/>
-           <div style={{
+          <div style={{
             position: "absolute",
             bottom: "0.75rem",
             right: "0.5rem",
