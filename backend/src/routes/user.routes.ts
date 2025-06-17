@@ -223,4 +223,103 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.put('/update', async (req, res) => {
+    const wantsJson = req.headers.accept?.includes('application/json');
+
+    try {
+        const { id, nome, username } = req.body;
+
+        const nomeTrim = nome.trim();
+        const usernameTrim = username.trim().toLowerCase();
+
+        if (!nomeTrim || !usernameTrim) {
+            return redirectWithToast(res, {
+                title: "Campos obrigatórios",
+                description: "Preencha todos os campos obrigatórios.",
+                json: wantsJson
+            })
+        }
+
+        if (usernameTrim.length < 3 || usernameTrim.length > 20) {
+            return redirectWithToast(res, {
+                title: "Nome de usuário inválido",
+                description: "O nome de usuário deve ter entre 3 e 20 caracteres.",
+                json: wantsJson
+            });
+        }
+
+        const usernameRegex = /^[a-zA-Z0-9_.-]+$/;
+        if (!usernameRegex.test(usernameTrim)) {
+            return redirectWithToast(res, {
+                title: "Nome de usuário inválido",
+                description: "Use apenas letras, números, pontos, traços ou underlines no nome de usuário.",
+                json: wantsJson
+            });
+        }
+
+
+        try {
+            // Verificar se o username já está em uso por outro usuário
+            const [usernameExists] = await db.promise().query(
+                `SELECT * FROM Usuario WHERE username = ? AND id != ?`, 
+                [usernameTrim, id]
+            );
+            if ((usernameExists as any[]).length > 0) {
+                return redirectWithToast(res, {
+                    title: "Nome de usuário indisponível",
+                    description: "Esse nome de usuário já está em uso. Por favor, escolha outro.",
+                    json: wantsJson
+                });
+            }
+
+
+        } catch (err) {
+            console.error('Erro ao verificar disponibilidade do username:', err);
+            return redirectWithToast(res, {
+                title: "Erro no servidor",
+                description: "Ocorreu um problema ao verificar o nome de usuário. Por favor, tente novamente mais tarde.",
+                json: wantsJson
+            });
+        }
+
+
+        await db.promise().query(
+            `UPDATE Usuario SET nome = ?, username = ? WHERE id = ?`,
+            [nomeTrim, usernameTrim, id]
+        );
+
+        return res.json({ message: "Usuário atualizado com sucesso!" });
+    
+    } catch ( err: any) {
+        console.error('Erro ao atualizar usuário:', err);
+        return redirectWithToast(res, {
+            title: "Erro no servidor",
+            description: "Ocorreu um problema ao atualizar seu perfil. Por favor, tente novamente mais tarde.",
+            json: wantsJson
+        })
+    }
+});
+
+router.delete('/delete', async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        await db.promise().query(
+            `DELETE FROM Usuario WHERE id = ?`,
+            [id]
+        );
+
+        return res.json({ message: "Usuário deletado com sucesso!" });
+    } catch (err: any) {
+        console.error('Erro ao deletar usuário:', err);
+        const wantsJson = req.headers.accept?.includes('application/json');
+        return redirectWithToast(res, {
+            title: "Erro no servidor",
+            description: "Ocorreu um problema ao deletar sua conta. Por favor, tente novamente mais tarde.",
+            json: wantsJson
+        });
+    }
+
+});
+
 export default router;
