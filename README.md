@@ -26,6 +26,12 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
    - Execute o arquivo SQL `db_synapse.sql` (localizado na pasta `/database`) em uma ferramenta como o MySQL Workbench.
    - Isso criará o banco `db_synapse` com as tabelas necessárias.
 
+> 💡 Caso queira popular o banco de dados com usuários e cursos de exemplo, execute também o arquivo:
+>
+> ```bash
+> /database/popular_banco.sql
+> ```
+
 2. **Configuração de Ambiente (.env):**
 
    - Copie os arquivos `.env.example` e renomeie para `.env`, tanto na **raiz do projeto** quanto na **pasta `/backend`**.
