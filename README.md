@@ -1,46 +1,125 @@
-# Getting Started with Create React App
+# Synapse Connect
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Capa do Projeto](./banner.png)
 
-## Available Scripts
+# Sobre o Projeto
 
-In the project directory, you can run:
+O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar cursos ou acessar conteúdos educacionais criados por outros usuários. O foco do projeto é oferecer um ambiente simples e acessível para quem deseja compartilhar e adquirir conhecimento na área de tecnologia.
 
-### `npm start`
+<h4 align="center"> 
+ 📌 Projeto entregue como parte da disciplina de Ciência da Computação 📌
+</h4>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 📑 Índice
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 📌 [Sobre o Projeto](#sobre-o-projeto)
+- ⚙️ [Como Iniciar o Projeto](#como-iniciar-o-projeto)
+- ✅ [Requisitos Funcionais](#requisitos-funcionais)
+- 🛠️ [Tecnologias Usadas](#tecnologias-usadas)
+- 👥 [Autores](#autores)
+- 🙏 [Agradecimentos](#agradecimentos)
 
-### `npm test`
+# ⚙️ Como Iniciar o Projeto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Banco de Dados:**
 
-### `npm run build`
+   - Execute o arquivo SQL `db_synapse.sql` (localizado na pasta `/database`) em uma ferramenta como o MySQL Workbench.
+   - Isso criará o banco `db_synapse` com as tabelas necessárias.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Configuração de Ambiente (.env):**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   - Copie os arquivos `.env.example` e renomeie para `.env`, tanto na **raiz do projeto** quanto na **pasta `/backend`**.
+   - Preencha as variáveis de ambiente com suas credenciais e secrets.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   - **.env na raiz (Frontend):**
 
-### `npm run eject`
+     ```env
+     REACT_APP_GOOGLE_CLIENT_ID=
+     REACT_APP_CLIENT_ID_GITHUB=
+     ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   - **.env na pasta /backend:**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+     ```env
+     PORT=3001
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+     DB_HOST=localhost
+     DB_USER=seu_usuario
+     DB_PASSWORD=sua_senha
+     DB_NAME=db_synapse
+     DB_PORT=3306
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+     CLIENT_ID_GITHUB=
+     CLIENT_SECRET_GITHUB=
 
-## Learn More
+     JWT_SECRET=
+     ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+⚠️ **Importante:**
+- **Não altere a porta `3001` no backend.** O sistema depende dela para funcionar corretamente.
+- Certifique-se de inserir corretamente o usuário e senha do MySQL.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. **Instalação de Dependências e Execução:**
+
+   - **Frontend:**
+     ```bash
+      # Acesse a raiz do projeto
+      cd ./ 
+      npm install
+      npm start
+     ```
+
+   - **Backend:**
+     ```bash
+     cd backend
+     tsc && node dist/server.js
+     ```
+
+     Se o comando acima não funcionar, tente:
+     ```bash
+     npx tsc && node dist/server.js
+     ```
+
+4. **Pronto!** Agora você pode acessar o sistema localmente e explorar seus recursos.
+
+---
+
+🔐 Para configurar os logins com Google e GitHub, acesse o guia abaixo:  
+➡️ [`docs/Configurando_OAuth.md`](./docs/Configurando_OAuth.md)
+
+---
+
+# ✅ Requisitos Funcionais 
+
+- [x] **Cadastro de Usuário**
+- [x] **Login com conta local, Google e GitHub**
+- [x] **Criação de Cursos**
+- [x] **Visualização de Cursos por Categoria**
+- [x] **Perfil do Usuário**
+- [x] **Visualização de perfil público de outros usuários**
+- [x] **Visualização de cursos criados por outros usuários**
+- [x] **Layout responsivo (desktop e mobile)**
+- [ ] Compra e matrícula em cursos
+- [ ] Edição de perfil
+
+# 🛠️ Tecnologias Usadas
+
+- [React](https://reactjs.org/)  
+- [TypeScript](https://www.typescriptlang.org/)  
+- [Chakra UI](https://chakra-ui.com/)  
+- [Express.js](https://expressjs.com/)  
+- [MySQL](https://www.mysql.com/)  
+- [JWT (JSON Web Token)](https://jwt.io/)  
+- [OAuth 2.0 (Google e GitHub)](https://oauth.net/2/)
+
+# 👥 Autores
+
+- **Patrick de Melo Freitas Santos** — RA: 825157265  
+- **Gabriel Amaro Lopes** — RA: 824130903  
+- **Alan Rocha Binato** — RA: 824150209  
+- **Lucas de Claris** — RA: 824137517  
+- **Max Maya Monteiro Pereira** — RA: 824213243  
+
+# 🙏 Agradecimentos
+
+Agradecemos ao professor pela orientação e a todos que contribuíram direta ou indiretamente para o desenvolvimento deste projeto.
