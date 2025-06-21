@@ -1,3 +1,6 @@
+-- Seleciona o banco de dados correto
+USE db_synapse;
+
 -- Inserção de usuários de exemplo
 
 INSERT INTO Usuario (id, nome, username, email, senha, provider)
