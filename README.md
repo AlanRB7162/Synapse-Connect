@@ -109,7 +109,7 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
 ---
 
 🔐 Para configurar os logins com Google e GitHub, acesse o guia abaixo:  
-➡️ [`docs/Configurando_OAuth.md`](./docs/Configurando_OAuth.md)
+➡️ [`docs/Guia_OAuth.md`](./docs/Guia_OAuth.md)
 
 ---
 
