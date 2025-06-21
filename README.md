@@ -63,6 +63,8 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
      JWT_SECRET=
      ```
 
+> Altere a porta do banco de dados caso a sua não seja 3306
+
 ⚠️ **Importante:**
 - **Não altere a porta `3001` no backend.** O sistema depende dela para funcionar corretamente.
 - Certifique-se de inserir corretamente o usuário e senha do MySQL.
