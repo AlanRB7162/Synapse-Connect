@@ -67,21 +67,35 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
 
 3. **Instalação de Dependências e Execução:**
 
+> 🧩 **Importante:** Para rodar o projeto corretamente, abra **duas abas (ou janelas)** do terminal — uma para o **frontend** e outra para o **backend**.
+
+---
+
    - **Frontend:**
-     ```bash
-      # Acesse a raiz do projeto
-      cd ./ 
-      npm install
-      npm start
-     ```
+   1. Acesse a raiz do projeto:
+      ```bash
+       cd ./ 
+      ```
+   2. Instale as dependências:
+      ```bash
+       npm install
+      ```
+   3. Inicie o frontend:
+      ```bash
+       npm start
+      ```
 
    - **Backend:**
-     ```bash
-     cd backend
-     tsc && node dist/server.js
-     ```
+   1. Acesse a pasta do backend:
+      ```bash
+       cd backend
+      ```
+   2. Compile e inicie o servidor:
+      ```bash
+       tsc && node dist/server.js
+      ```
 
-     Se o comando acima não funcionar, tente:
+   Se o comando acima não funcionar, tente:
      ```bash
      npx tsc && node dist/server.js
      ```
