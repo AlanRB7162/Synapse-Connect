@@ -32,6 +32,8 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
 > /database/popular_banco.sql
 > ```
 
+---
+
 2. **Configuração de Ambiente (.env):**
 
    - Copie os arquivos `.env.example` e renomeie para `.env`, tanto na **raiz do projeto** quanto na **pasta `/backend`**.
