@@ -65,11 +65,11 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
 - **Não altere a porta `3001` no backend.** O sistema depende dela para funcionar corretamente.
 - Certifique-se de inserir corretamente o usuário e senha do MySQL.
 
+---
+
 3. **Instalação de Dependências e Execução:**
 
 > 🧩 **Importante:** Para rodar o projeto corretamente, abra **duas abas (ou janelas)** do terminal — uma para o **frontend** e outra para o **backend**.
-
----
 
    - **Frontend:**
    1. Acesse a raiz do projeto:
@@ -99,6 +99,8 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
      ```bash
      npx tsc && node dist/server.js
      ```
+
+---
 
 4. **Pronto!** Agora você pode acessar o sistema localmente e explorar seus recursos.
 
@@ -142,4 +144,4 @@ O **Synapse Connect** é uma plataforma onde usuários podem se cadastrar, criar
 
 # 🙏 Agradecimentos
 
-Agradecemos ao professor pela orientação e a todos que contribuíram direta ou indiretamente para o desenvolvimento deste projeto.
+Agradecemos aos professores pela orientação e a todos que contribuíram direta ou indiretamente para o desenvolvimento deste projeto.
